@@ -13,7 +13,7 @@
   "isPublic": true,
   "isPaid": false,
   "price": "Free",
-  "status": "application-definition-in-progress",
+  "status": "data-models-in-progress",
   "developerName": "Tansel Ozkusaksiz",
   "createdById": "e995822b-f88d-40ef-86df-0f07cb1149d8",
   "createdBy": "Tansel Ozkusaksiz",
@@ -31,7 +31,5291 @@
     "createdById": "e995822b-f88d-40ef-86df-0f07cb1149d8",
     "createdBy": "Tansel Ozkusaksiz"
   },
-  "dataModels": [],
+  "dataModels": [
+    {
+      "name": "ComCart",
+      "title": "Shopping Cart",
+      "description": "Customer active shopping session, currency, applied coupon codes, and expiry.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComCart",
+      "dataTableName": "ComCart",
+      "sqlTableName": "com_cart",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name || id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": []
+        },
+        "entityItemUpdate": {
+          "nonUpdatableFields": [
+            "id",
+            "createdAt"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": []
+        },
+        "entityItemDelete": {
+          "softDelete": true
+        },
+        "entityItemRead": {
+          "defaultSort": "createdAt DESC",
+          "maxLimit": 100
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "customerId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "anonymousSessionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "subtotal",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "discountTotal",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "expiresAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "ComPage",
+      "title": "Website Page",
+      "description": "Content pages, marketing landing pages, and legal policy pages with revision control.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComPage",
+      "dataTableName": "ComPage",
+      "sqlTableName": "com_page",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name || id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": []
+        },
+        "entityItemUpdate": {
+          "nonUpdatableFields": [
+            "id",
+            "createdAt"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": []
+        },
+        "entityItemDelete": {
+          "softDelete": true
+        },
+        "entityItemRead": {
+          "defaultSort": "createdAt DESC",
+          "maxLimit": 100
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "siteId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "seoTitle",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "seoDescription",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "canonicalUrl",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "publishedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "ComPosTransaction",
+      "title": "POS Transaction",
+      "description": "In-store sales transaction, item scan journal, discounts, tax computation, and receipt snapshot.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComPosTransaction",
+      "dataTableName": "ComPosTransaction",
+      "sqlTableName": "com_pos_transaction",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name || id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": []
+        },
+        "entityItemUpdate": {
+          "nonUpdatableFields": [
+            "id",
+            "createdAt"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": []
+        },
+        "entityItemDelete": {
+          "softDelete": true
+        },
+        "entityItemRead": {
+          "defaultSort": "createdAt DESC",
+          "maxLimit": 100
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "sessionId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "registerId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "transactionNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "itemsCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "subtotal",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "taxTotal",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "totalAmount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "transactedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "ComProduct",
+      "title": "Product",
+      "description": "Products or services sold by the business.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComProduct",
+      "dataTableName": "ComProduct",
+      "sqlTableName": "com_product",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name",
+            "listPrice"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "listPrice",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "cost",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isActive",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "productType",
+          "type": "string",
+          "description": "Allowed values: PHYSICAL, DIGITAL, SERVICE, SUBSCRIPTION_PLAN, BUNDLE",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "PHYSICAL",
+            "DIGITAL",
+            "SERVICE",
+            "SUBSCRIPTION_PLAN",
+            "BUNDLE"
+          ],
+          "options": [
+            "PHYSICAL",
+            "DIGITAL",
+            "SERVICE",
+            "SUBSCRIPTION_PLAN",
+            "BUNDLE"
+          ]
+        },
+        {
+          "name": "standardCost",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "taxCategoryCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "revenueRecognitionCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "entitlementTemplateJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "uom",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "brand",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "visibility",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "canonicalInventoryItemId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "externalCatalogRef",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "taxCategory",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "revenueCategory",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "entitlementRef",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "category",
+          "type": "belongsTo",
+          "sourceModel": "ComProduct",
+          "sourceField": "categoryId",
+          "targetModel": "ComCategory",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "ComProduct category foreign key link to ComCategory."
+        },
+        {
+          "name": "inventoryItem",
+          "type": "belongsTo",
+          "sourceModel": "ComProduct",
+          "sourceField": "inventoryItemId",
+          "targetModel": "OpsInventoryItem",
+          "targetField": "id?",
+          "throughModel": null,
+          "description": "ComProduct inventoryItem foreign key link to OpsInventoryItem."
+        },
+        {
+          "name": "plmRevision",
+          "type": "belongsTo",
+          "sourceModel": "ComProduct",
+          "sourceField": "plmRevisionId",
+          "targetModel": "MfgProductRevision",
+          "targetField": "id?",
+          "throughModel": null,
+          "description": "ComProduct plmRevision foreign key link to MfgProductRevision."
+        }
+      ]
+    },
+    {
+      "name": "ComSite",
+      "title": "Commerce Site",
+      "description": "Brand website identity, domain configurations, localization, and publishing targets.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComSite",
+      "dataTableName": "ComSite",
+      "sqlTableName": "com_site",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name || id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": []
+        },
+        "entityItemUpdate": {
+          "nonUpdatableFields": [
+            "id",
+            "createdAt"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": []
+        },
+        "entityItemDelete": {
+          "softDelete": true
+        },
+        "entityItemRead": {
+          "defaultSort": "createdAt DESC",
+          "maxLimit": 100
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "siteCode",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "domains",
+          "type": "array",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": true
+        },
+        {
+          "name": "defaultLocale",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "defaultCurrency",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "themeTokens",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "ComVariant",
+      "title": "Product Variant",
+      "description": "Specific SKU variant with distinct attributes such as size, color, material, and barcode.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComVariant",
+      "dataTableName": "ComVariant",
+      "sqlTableName": "com_variant",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name || id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": []
+        },
+        "entityItemUpdate": {
+          "nonUpdatableFields": [
+            "id",
+            "createdAt"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": []
+        },
+        "entityItemDelete": {
+          "softDelete": true
+        },
+        "entityItemRead": {
+          "defaultSort": "createdAt DESC",
+          "maxLimit": 100
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "barcode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "options",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "weight",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "CrmContact",
+      "title": "Contact",
+      "description": "Represents an individual person, usually associated with an Account.",
+      "domainName": "Rapider CRM Suite",
+      "domainKey": "CRM",
+      "datatableName": "CrmContact",
+      "dataTableName": "CrmContact",
+      "sqlTableName": "crm_contact",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ firstName }} {{ lastName }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "firstName",
+          "lastName",
+          "email",
+          "jobTitle"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "firstName",
+            "lastName",
+            "accountId"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [],
+          "additionalPrompt": "Always link a contact to an account if mentioned.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "Email must be a valid format if provided."
+        },
+        "entityItemUpdate": {
+          "immutableFields": [],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 15,
+          "hiddenFields": [],
+          "maskedFields": [
+            "phone"
+          ],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "accountId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "firstName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "lastName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "fullName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "phoneE164",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "jobSeniority",
+          "type": "string",
+          "description": "Allowed values: C_SUITE, VP, DIRECTOR, MANAGER, IC",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "C_SUITE",
+            "VP",
+            "DIRECTOR",
+            "MANAGER",
+            "IC"
+          ],
+          "options": [
+            "C_SUITE",
+            "VP",
+            "DIRECTOR",
+            "MANAGER",
+            "IC"
+          ]
+        },
+        {
+          "name": "buyingRole",
+          "type": "string",
+          "description": "Allowed values: ECONOMIC_BUYER, CHAMPION, EVALUATOR, PROCUREMENT, END_USER",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "ECONOMIC_BUYER",
+            "CHAMPION",
+            "EVALUATOR",
+            "PROCUREMENT",
+            "END_USER"
+          ],
+          "options": [
+            "ECONOMIC_BUYER",
+            "CHAMPION",
+            "EVALUATOR",
+            "PROCUREMENT",
+            "END_USER"
+          ]
+        },
+        {
+          "name": "portalUserId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "preferredLanguage",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "timezone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "marketingConsentStatus",
+          "type": "string",
+          "description": "Allowed values: OPTED_IN, OPTED_OUT, UNSET",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "OPTED_IN",
+            "OPTED_OUT",
+            "UNSET"
+          ],
+          "options": [
+            "OPTED_IN",
+            "OPTED_OUT",
+            "UNSET"
+          ]
+        },
+        {
+          "name": "dncStatus",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Allowed values: ACTIVE, INACTIVE, BOUNCED, SUPPRESSED",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "ACTIVE",
+            "INACTIVE",
+            "BOUNCED",
+            "SUPPRESSED"
+          ],
+          "options": [
+            "ACTIVE",
+            "INACTIVE",
+            "BOUNCED",
+            "SUPPRESSED"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "company",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "account",
+          "type": "belongsTo",
+          "sourceModel": "CrmContact",
+          "sourceField": "accountId",
+          "targetModel": "CrmAccount",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "The account this contact is associated with."
+        },
+        {
+          "name": "opportunities",
+          "type": "hasMany",
+          "sourceModel": "CrmContact",
+          "sourceField": "id",
+          "targetModel": "CrmOpportunity",
+          "targetField": "primaryContactId",
+          "throughModel": null,
+          "description": "Opportunities where this contact is the primary stakeholder."
+        },
+        {
+          "name": "ownerEmployee",
+          "type": "belongsTo",
+          "sourceModel": "CrmContact",
+          "sourceField": "ownerEmployeeId",
+          "targetModel": "HrEmployee",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "CrmContact ownerEmployee foreign key link to HrEmployee."
+        },
+        {
+          "name": "sourceCampaign",
+          "type": "belongsTo",
+          "sourceModel": "CrmContact",
+          "sourceField": "sourceCampaignId",
+          "targetModel": "MktCampaign",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "CrmContact sourceCampaign foreign key link to MktCampaign."
+        }
+      ]
+    },
+    {
+      "name": "MfgQualityInspection",
+      "title": "Quality Inspection Record",
+      "description": "Inspection execution session on a specific manufacturing order or receiving lot.",
+      "domainName": "Rapider Manufacturing Suite",
+      "domainKey": "MFG",
+      "datatableName": "MfgQualityInspection",
+      "dataTableName": "MfgQualityInspection",
+      "sqlTableName": "mfg_quality_inspection",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name || code || id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "name"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": []
+        },
+        "entityItemUpdate": {
+          "nonUpdatableFields": [
+            "id",
+            "createdAt"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": []
+        },
+        "entityItemDelete": {
+          "softDelete": true
+        },
+        "entityItemRead": {
+          "defaultSort": "createdAt DESC",
+          "maxLimit": 100
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "inspectionNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "planId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "sourceLotNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "inspectorWorkerId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "overallResult",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "inspectedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "MktEmailMessage",
+      "title": "Email Message",
+      "description": "Email composition specification, sender metadata, subject, templates, and delivery settings.",
+      "domainName": "Rapider Marketing Suite",
+      "domainKey": "MKT",
+      "datatableName": "MktEmailMessage",
+      "dataTableName": "MktEmailMessage",
+      "sqlTableName": "mkt_email_message",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Email Message, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "purpose",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "fromName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "fromAddress",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "replyTo",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "preheader",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "htmlAssetVersionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "textContentRef",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "audienceId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "suppressionIds",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "campaignId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "scheduledAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "timezone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "providerConnectionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "trackingPolicy",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "sends",
+          "type": "hasMany",
+          "sourceModel": "MktEmailMessage",
+          "sourceField": "id",
+          "targetModel": "MktEmailSend",
+          "targetField": "emailMessageId",
+          "throughModel": null,
+          "description": "MktEmailMessage relation to MktEmailSend."
+        },
+        {
+          "name": "variants",
+          "type": "hasMany",
+          "sourceModel": "MktEmailMessage",
+          "sourceField": "id",
+          "targetModel": "MktEmailVariant",
+          "targetField": "emailMessageId",
+          "throughModel": null,
+          "description": "MktEmailMessage relation to MktEmailVariant."
+        }
+      ]
+    },
+    {
+      "name": "MktSmsMessage",
+      "title": "SMS Message",
+      "description": "Text message copy, character encoding, estimated segment count, and regulatory consent checks.",
+      "domainName": "Rapider Marketing Suite",
+      "domainKey": "MKT",
+      "datatableName": "MktSmsMessage",
+      "dataTableName": "MktSmsMessage",
+      "sqlTableName": "mkt_sms_message",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating SMS Message, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "purpose",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "body",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "audienceId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "consentPurpose",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "campaignId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "providerConnectionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "senderId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "shortLinkPolicy",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "scheduledAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "timezone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "encoding",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "estimatedSegments",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "batches",
+          "type": "hasMany",
+          "sourceModel": "MktSmsMessage",
+          "sourceField": "id",
+          "targetModel": "MktSmsBatch",
+          "targetField": "smsMessageId",
+          "throughModel": null,
+          "description": "MktSmsMessage relation to MktSmsBatch."
+        }
+      ]
+    },
+    {
+      "name": "MktSurvey",
+      "title": "Survey",
+      "description": "Customer satisfaction survey result.",
+      "domainName": "Rapider Marketing Suite",
+      "domainKey": "MKT",
+      "datatableName": "MktSurvey",
+      "dataTableName": "MktSurvey",
+      "sqlTableName": "mkt_survey",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ rating }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Survey, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "purpose",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "schemaVersionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "audienceId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "channel",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "campaignId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "anonymousMode",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "openAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "closeAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "responseLimit",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "OpsCustomerOrder",
+      "title": "Order",
+      "description": "Generated from won Opportunities, recording final sales agreements.",
+      "domainName": "Rapider Operations Suite",
+      "domainKey": "OPS",
+      "datatableName": "OpsCustomerOrder",
+      "dataTableName": "OpsCustomerOrder",
+      "sqlTableName": "ops_customer_order",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "Order: ${{ totalAmount }} ({{ status }})",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "status"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "accountId",
+            "totalAmount"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "status"
+          ],
+          "additionalPrompt": "",
+          "requireUserConfirmation": true,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "accountId",
+            "opportunityId"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": [
+            {
+              "description": "Cannot modify fulfilled orders.",
+              "where": {}
+            }
+          ]
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "opportunityId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "accountId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "totalAmount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "quoteId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "CrmQuote",
+          "referenceField": "id"
+        },
+        {
+          "name": "cartId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "ComCart",
+          "referenceField": "id"
+        },
+        {
+          "name": "contactId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "CrmContact",
+          "referenceField": "id"
+        },
+        {
+          "name": "legalEntityId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "FinLegalEntity",
+          "referenceField": "id"
+        },
+        {
+          "name": "fulfillmentStatus",
+          "type": "string",
+          "description": "Allowed values: UNFULFILLED, PARTIAL, FULFILLED, RETURNED",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "UNFULFILLED",
+            "PARTIAL",
+            "FULFILLED",
+            "RETURNED"
+          ],
+          "options": [
+            "UNFULFILLED",
+            "PARTIAL",
+            "FULFILLED",
+            "RETURNED"
+          ]
+        },
+        {
+          "name": "invoiceId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "FinInvoice",
+          "referenceField": "id"
+        },
+        {
+          "name": "channelOrderId",
+          "type": "string",
+          "description": "",
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "canonicalOrderId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "customerId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "orderTotal",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "paymentStatus",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "orderNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "crmAccountId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "customerName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "channel",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "orderDate",
+          "type": "date",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "account",
+          "type": "belongsTo",
+          "sourceModel": "OpsCustomerOrder",
+          "sourceField": "accountId",
+          "targetModel": "CrmAccount",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "The account placing the order."
+        },
+        {
+          "name": "opportunity",
+          "type": "belongsTo",
+          "sourceModel": "OpsCustomerOrder",
+          "sourceField": "opportunityId",
+          "targetModel": "CrmOpportunity",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "The original opportunity that led to this order."
+        },
+        {
+          "name": "crmAccount",
+          "type": "belongsTo",
+          "sourceModel": "OpsCustomerOrder",
+          "sourceField": "crmAccountId",
+          "targetModel": "CrmAccount",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsCustomerOrder crmAccount foreign key link to CrmAccount."
+        },
+        {
+          "name": "contact",
+          "type": "belongsTo",
+          "sourceModel": "OpsCustomerOrder",
+          "sourceField": "contactId",
+          "targetModel": "CrmContact",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsCustomerOrder contact foreign key link to CrmContact."
+        },
+        {
+          "name": "quote",
+          "type": "belongsTo",
+          "sourceModel": "OpsCustomerOrder",
+          "sourceField": "quoteId",
+          "targetModel": "CrmQuote",
+          "targetField": "id?",
+          "throughModel": null,
+          "description": "OpsCustomerOrder quote foreign key link to CrmQuote."
+        },
+        {
+          "name": "cart",
+          "type": "belongsTo",
+          "sourceModel": "OpsCustomerOrder",
+          "sourceField": "cartId",
+          "targetModel": "ComCart",
+          "targetField": "id?",
+          "throughModel": null,
+          "description": "OpsCustomerOrder cart foreign key link to ComCart."
+        }
+      ]
+    },
+    {
+      "name": "OpsReturnRequest",
+      "title": "Return Request (RMA)",
+      "description": "Return material authorization management, inspection triage, restock, and refund integration.",
+      "domainName": "Rapider Operations Suite",
+      "domainKey": "OPS",
+      "datatableName": "OpsReturnRequest",
+      "dataTableName": "OpsReturnRequest",
+      "sqlTableName": "ops_return_request",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Return Request (RMA), ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "rmaNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "orderId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "customerName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "refundAmount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "returnReasonCode",
+          "type": "string",
+          "description": "Allowed values: DEFECTIVE, WRONG_SIZE, DAMAGED_IN_TRANSIT, CHANGED_MIND, WARRANTY",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "DEFECTIVE",
+            "WRONG_SIZE",
+            "DAMAGED_IN_TRANSIT",
+            "CHANGED_MIND",
+            "WARRANTY"
+          ],
+          "options": [
+            "DEFECTIVE",
+            "WRONG_SIZE",
+            "DAMAGED_IN_TRANSIT",
+            "CHANGED_MIND",
+            "WARRANTY"
+          ]
+        },
+        {
+          "name": "resolutionType",
+          "type": "string",
+          "description": "Allowed values: REFUND, EXCHANGE, STORE_CREDIT, REPAIR) (from #130 ComReturnRequest",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "REFUND",
+            "EXCHANGE",
+            "STORE_CREDIT",
+            "REPAIR) (from #130 ComReturnRequest"
+          ],
+          "options": [
+            "REFUND",
+            "EXCHANGE",
+            "STORE_CREDIT",
+            "REPAIR) (from #130 ComReturnRequest"
+          ]
+        },
+        {
+          "name": "returnShipmentId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "OpsShipment",
+          "referenceField": "id"
+        },
+        {
+          "name": "refundPaymentIntentId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "FinPaymentIntent",
+          "referenceField": "id"
+        },
+        {
+          "name": "storeCreditVoucherId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "ComStoreCreditVoucher",
+          "referenceField": "id"
+        },
+        {
+          "name": "customerOrderId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "posTransactionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "marketplaceOrderSyncId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "contactId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "recipientPhone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "policyId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "originChannel",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isBlindGiftReturn",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "dropOffMethod",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "returnShippingLabelId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "destinationWarehouseId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "rmaStatus",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "authorizedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "customerOrder",
+          "type": "belongsTo",
+          "sourceModel": "OpsReturnRequest",
+          "sourceField": "customerOrderId",
+          "targetModel": "OpsCustomerOrder",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsReturnRequest customerOrder foreign key link to OpsCustomerOrder."
+        },
+        {
+          "name": "account",
+          "type": "belongsTo",
+          "sourceModel": "OpsReturnRequest",
+          "sourceField": "accountId",
+          "targetModel": "CrmAccount",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsReturnRequest account foreign key link to CrmAccount."
+        },
+        {
+          "name": "contact",
+          "type": "belongsTo",
+          "sourceModel": "OpsReturnRequest",
+          "sourceField": "contactId",
+          "targetModel": "CrmContact",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsReturnRequest contact foreign key link to CrmContact."
+        },
+        {
+          "name": "returnShipment",
+          "type": "belongsTo",
+          "sourceModel": "OpsReturnRequest",
+          "sourceField": "returnShipmentId",
+          "targetModel": "OpsShipment",
+          "targetField": "id?",
+          "throughModel": null,
+          "description": "OpsReturnRequest returnShipment foreign key link to OpsShipment."
+        },
+        {
+          "name": "customerOrderId",
+          "type": "belongsTo",
+          "sourceModel": "OpsReturnRequest",
+          "sourceField": "`customerOrderId`",
+          "targetModel": "OpsCustomerOrder",
+          "targetField": "id`, `returnShippingLabelId`",
+          "throughModel": null,
+          "description": "OpsReturnRequest `customerOrderId` foreign key link to `OpsCustomerOrder."
+        }
+      ]
+    },
+    {
+      "name": "OpsShipment",
+      "title": "Shipment",
+      "description": "TRANSFER\\",
+      "domainName": "Rapider Operations Suite",
+      "domainKey": "OPS",
+      "datatableName": "OpsShipment",
+      "dataTableName": "OpsShipment",
+      "sqlTableName": "ops_shipment",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Shipment, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "shipmentNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "direction",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "customerOrderId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "warehouseTaskId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "originWarehouseId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "packagePresetId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "parcelSequence",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "totalParcelsInOrder",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "recipientName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "recipientPhone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "shippingAddressJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "avsStatus",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isResidential",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "pudoPointId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "grossWeightKg",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "dimWeightKg",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "estimatedCo2Kg",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "deliverByDeadlineAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "shipmentState",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "customerOrder",
+          "type": "belongsTo",
+          "sourceModel": "OpsShipment",
+          "sourceField": "customerOrderId",
+          "targetModel": "OpsCustomerOrder",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsShipment customerOrder foreign key link to OpsCustomerOrder."
+        }
+      ]
+    },
+    {
+      "name": "OpsTrackingEvent",
+      "title": "Tracking Event",
+      "description": "IN_TRANSIT\\",
+      "domainName": "Rapider Operations Suite",
+      "domainKey": "OPS",
+      "datatableName": "OpsTrackingEvent",
+      "dataTableName": "OpsTrackingEvent",
+      "sqlTableName": "ops_tracking_event",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Tracking Event, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "eventCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "shippingLabelId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "shipmentId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "normalizedStatus",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "rawCarrierCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "scanCity",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "scanCountry",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "occurredAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "linkedSupportTicketId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "shippingLabel",
+          "type": "belongsTo",
+          "sourceModel": "OpsTrackingEvent",
+          "sourceField": "shippingLabelId",
+          "targetModel": "ComShippingLabel",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "OpsTrackingEvent shippingLabel foreign key link to ComShippingLabel."
+        }
+      ]
+    },
+    {
+      "name": "SupTicket",
+      "title": "Case",
+      "description": "Represents a customer support issue or ticket.",
+      "domainName": "Rapider Customer Support Suite",
+      "domainKey": "SUP",
+      "datatableName": "SupTicket",
+      "dataTableName": "SupTicket",
+      "sqlTableName": "sup_ticket",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ subject }} - {{ status }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "subject",
+          "description"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "subject",
+            "accountId"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "status",
+            "priority"
+          ],
+          "additionalPrompt": "Set priority to High if words like 'urgent' or 'critical' are used.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "accountId"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": [
+            {
+              "description": "Cannot modify closed cases.",
+              "where": {}
+            }
+          ]
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [],
+          "maskedFields": [],
+          "additionalPrompt": "Always list critical cases first."
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": [
+            {
+              "description": "Cannot delete resolved cases.",
+              "where": {}
+            }
+          ]
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "accountId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "contactId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "priority",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "ticketNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "channel",
+          "type": "string",
+          "description": "Allowed values: PORTAL, EMAIL, CHAT, VOICE, FIELD_SERVICE, SOCIAL, API",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "enumValues": [
+            "PORTAL",
+            "EMAIL",
+            "CHAT",
+            "VOICE",
+            "FIELD_SERVICE",
+            "SOCIAL",
+            "API"
+          ],
+          "options": [
+            "PORTAL",
+            "EMAIL",
+            "CHAT",
+            "VOICE",
+            "FIELD_SERVICE",
+            "SOCIAL",
+            "API"
+          ]
+        },
+        {
+          "name": "queueId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "SupQueue",
+          "referenceField": "id"
+        },
+        {
+          "name": "assetId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "referenceModel": "OpsOperationsAsset",
+          "referenceField": "id"
+        },
+        {
+          "name": "firstResponseDueAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "resolutionDueAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "csatScore",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "assigneeId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "slaPolicyId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "account",
+          "type": "belongsTo",
+          "sourceModel": "SupTicket",
+          "sourceField": "accountId",
+          "targetModel": "CrmAccount",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "The account this case is associated with."
+        },
+        {
+          "name": "contact",
+          "type": "belongsTo",
+          "sourceModel": "SupTicket",
+          "sourceField": "contactId",
+          "targetModel": "CrmContact",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "The individual contact associated with this case."
+        },
+        {
+          "name": "queue",
+          "type": "belongsTo",
+          "sourceModel": "SupTicket",
+          "sourceField": "queueId",
+          "targetModel": "SupQueue",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "SupTicket queue foreign key link to SupQueue."
+        },
+        {
+          "name": "assigneeEmployee",
+          "type": "belongsTo",
+          "sourceModel": "SupTicket",
+          "sourceField": "assigneeEmployeeId",
+          "targetModel": "HrEmployee",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "SupTicket assigneeEmployee foreign key link to HrEmployee."
+        },
+        {
+          "name": "slaPolicy",
+          "type": "belongsTo",
+          "sourceModel": "SupTicket",
+          "sourceField": "slaPolicyId",
+          "targetModel": "SupSlaPolicy",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "SupTicket slaPolicy foreign key link to SupSlaPolicy."
+        },
+        {
+          "name": "asset",
+          "type": "belongsTo",
+          "sourceModel": "SupTicket",
+          "sourceField": "assetId",
+          "targetModel": "OpsOperationsAsset",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "SupTicket asset foreign key link to OpsOperationsAsset."
+        }
+      ]
+    },
+    {
+      "name": "ComReviewAttributeTemplate",
+      "title": "Review Attribute Template",
+      "description": "`postDeliveryDelayDays >= 0`; slider definitions enforce 3- or 5-point discrete scales mapped to `-1.00 .. +1.00`.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComReviewAttributeTemplate",
+      "dataTableName": "ComReviewAttributeTemplate",
+      "sqlTableName": "com_review_attribute_template",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ name }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "name"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Review Attribute Template, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "templateCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "productCategoryCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "sliderDefinitionsJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "reviewerContextFieldsJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "smartPromptTopics",
+          "type": "array",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": true
+        },
+        {
+          "name": "postDeliveryDelayDays",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isActive",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "ComReviewRequest",
+      "title": "Review Request",
+      "description": "Raw token never persisted (only `tokenHash`); single submission per `(requestId, variantId)` line; auto-cancels if order/item is returned before `SENT`.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComReviewRequest",
+      "dataTableName": "ComReviewRequest",
+      "sqlTableName": "com_review_request",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Review Request, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "requestNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "customerOrderId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "posTransactionId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "shipmentId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "contactId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "recipientEmail",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "recipientPhone",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "provenanceType",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "rewardOffered",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "tokenHash",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "scheduledSendAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "sentAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "completedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "customerOrder",
+          "type": "belongsTo",
+          "sourceModel": "ComReviewRequest",
+          "sourceField": "customerOrderId",
+          "targetModel": "OpsCustomerOrder",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "ComReviewRequest customerOrder foreign key link to OpsCustomerOrder."
+        }
+      ]
+    },
+    {
+      "name": "ComProductReview",
+      "title": "Product Review",
+      "description": "`1 <= starRating <= 5`; FTC invariant: transitioning to `QUARANTINED_LEGAL` **requires** a non-null statutory `quarantineReasonCode` and appends an immutable moderation audit record; `SEEDED_FREE_SAMPLE` or `rewardOffered = true` forces `isIncentivized = true`.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComProductReview",
+      "dataTableName": "ComProductReview",
+      "sqlTableName": "com_product_review",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Product Review, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "reviewNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "variantId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "reviewRequestId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "contactId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "siteId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "starRating",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "storeExperienceRating",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "headline",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "bodyText",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "redactedBodyText",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "attributeResponsesJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "provenanceBadge",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isIncentivized",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "localeCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "helpfulCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "reportedCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "moderationStatus",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "quarantineReasonCode",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "quarantineAuditNote",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "merchantReplyText",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "merchantRepliedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "linkedSupportTicketId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "publishedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "product",
+          "type": "belongsTo",
+          "sourceModel": "ComProductReview",
+          "sourceField": "productId",
+          "targetModel": "ComProduct",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "ComProductReview product foreign key link to ComProduct."
+        }
+      ]
+    },
+    {
+      "name": "ComReviewMedia",
+      "title": "Review Media",
+      "description": "`exifScrubbed` must be `true` before `mediaModerationStatus` can become `APPROVED` to protect buyer home GPS coordinates.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComReviewMedia",
+      "dataTableName": "ComReviewMedia",
+      "sqlTableName": "com_review_media",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Review Media, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "reviewId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "variantId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "mediaType",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "fileId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "thumbnailFileId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "durationSeconds",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "exifScrubbed",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "isFeaturedOnPdp",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "mediaModerationStatus",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "review",
+          "type": "belongsTo",
+          "sourceModel": "ComReviewMedia",
+          "sourceField": "reviewId",
+          "targetModel": "ComProductReview",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "ComReviewMedia review foreign key link to ComProductReview."
+        }
+      ]
+    },
+    {
+      "name": "ComProductQuestion",
+      "title": "Product Question",
+      "description": "Only answers with `ANSWERED_PUBLISHED` render on public storefront PDP widgets.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComProductQuestion",
+      "dataTableName": "ComProductQuestion",
+      "sqlTableName": "com_product_question",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Product Question, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "questionNumber",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "variantId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "siteId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "askerContactId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "askerDisplayName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "askerEmail",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "questionText",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "officialAnswerText",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "officialAnsweredByUserId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "communityAnswersJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "askedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "answeredAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "product",
+          "type": "belongsTo",
+          "sourceModel": "ComProductQuestion",
+          "sourceField": "productId",
+          "targetModel": "ComProduct",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "ComProductQuestion product foreign key link to ComProduct."
+        }
+      ]
+    },
+    {
+      "name": "ComProductRatingSummary",
+      "title": "Product Rating Summary",
+      "description": "Deterministically recomputed strictly from `PUBLISHED` `ComProductReview`s (`star1Count + ... + star5Count == publishedReviewCount`); AI summary requires `publishedReviewCount >= 10`.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComProductRatingSummary",
+      "dataTableName": "ComProductRatingSummary",
+      "sqlTableName": "com_product_rating_summary",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Product Rating Summary, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "publishedReviewCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "verifiedBuyerCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "averageStarRating",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "star1Count",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "star2Count",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "star3Count",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "star4Count",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "star5Count",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "mediaItemCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "attributeRollupsJson",
+          "type": "object",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "aiSummaryPros",
+          "type": "array",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": true
+        },
+        {
+          "name": "aiSummaryCons",
+          "type": "array",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": true
+        },
+        {
+          "name": "aiCitedReviewIds",
+          "type": "array",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": true
+        },
+        {
+          "name": "aiSummaryUpdatedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Lifecycle or record status.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": []
+    },
+    {
+      "name": "ComReviewSyndicationFeed",
+      "title": "Review Syndication Feed",
+      "description": "For `GOOGLE_SHOPPING_RATINGS`, `excludeIncentivized` is locked `true` if strict merchant policy applies or explicitly emitted with `<is_incentivized_review>true</is_incentivized_review>` per Google spec.",
+      "domainName": "Rapider Commerce Suite",
+      "domainKey": "COM",
+      "datatableName": "ComReviewSyndicationFeed",
+      "dataTableName": "ComReviewSyndicationFeed",
+      "sqlTableName": "com_review_syndication_feed",
+      "isolationScope": "ENTERPRISE_SHARED",
+      "titleFieldTemplate": "{{ id }}",
+      "scope": {
+        "where": {}
+      },
+      "aiAgentConfig": {
+        "vectorSearchFields": [
+          "id"
+        ],
+        "planning": {
+          "availableOperations": [
+            "create",
+            "update",
+            "read",
+            "delete"
+          ]
+        },
+        "entityItemCreate": {
+          "requiredFields": [
+            "id"
+          ],
+          "immutableFields": [
+            "isDeleted"
+          ],
+          "requiredRelations": [],
+          "autoGenerateFields": [
+            "id"
+          ],
+          "additionalPrompt": "When creating Review Syndication Feed, ensure required attributes are populated.",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": ""
+        },
+        "entityItemUpdate": {
+          "immutableFields": [
+            "id"
+          ],
+          "autoGenerateFields": [],
+          "additionalPrompt": "",
+          "requireUserConfirmation": false,
+          "customValidationPrompt": "",
+          "restrictedStates": []
+        },
+        "entityRead": {
+          "defaultPageSize": 20,
+          "defaultContextLimit": 30,
+          "hiddenFields": [
+            "isDeleted"
+          ],
+          "maskedFields": [],
+          "additionalPrompt": ""
+        },
+        "entityItemDelete": {
+          "requireCaptchaConfirmation": true,
+          "cascadingRelations": [],
+          "restrictedStates": []
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Primary key UUID.",
+          "isPrimaryKey": true,
+          "isRequired": true,
+          "isHidden": false,
+          "isArray": false,
+          "defaultFn": "uuidv4"
+        },
+        {
+          "name": "feedName",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "channelTarget",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "siteId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "excludeIncentivized",
+          "type": "boolean",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        },
+        {
+          "name": "minReviewCountThreshold",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "includedReviewCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "matchedGtinSkuCount",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "lastGeneratedFileId",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "lastGeneratedAt",
+          "type": "datetime",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "number",
+          "description": "",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false
+        },
+        {
+          "name": "isDeleted",
+          "type": "boolean",
+          "description": "Soft deletion flag.",
+          "isRequired": false,
+          "isHidden": false,
+          "isArray": false,
+          "default": false
+        }
+      ],
+      "relations": [
+        {
+          "name": "site",
+          "type": "belongsTo",
+          "sourceModel": "ComReviewSyndicationFeed",
+          "sourceField": "siteId",
+          "targetModel": "ComSite",
+          "targetField": "id",
+          "throughModel": null,
+          "description": "ComReviewSyndicationFeed site foreign key link to ComSite."
+        }
+      ]
+    }
+  ],
   "variables": [],
   "tools": [],
   "workflows": [],

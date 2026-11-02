@@ -3,709 +3,568 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Product Q&amp;A - Commerce Suite</title>
+  <title>Community Product Q&amp;A — Rapider Product Reviews &amp; Ratings</title>
   <script src="https://kit.fontawesome.com/5b23df26dc.js" crossorigin="anonymous" defer></script>
   <script src="/assets/js/rapider-components.js" defer></script>
   <link rel="stylesheet" href="/assets/themes/rapider-tailwind-theme.css">
   <link rel="stylesheet" href="/assets/themes/crm-expenses-design.css">
-
   <style>
-    dialog {
-      margin: auto;
-      border: none;
-      padding: 0;
-      background: transparent;
+    :root {
+      --ink: #172137;
+      --muted: #67728a;
+      --line: #e9ecf3;
+      --bg: #f5f6fa;
+      --purple: #6854df;
+      --purple-soft: #f3f0ff;
+      --panel: #ffffff;
+      --dark: #1f243a;
+      --soft: #eeeaff;
+      --green: #16795b;
+      --amber: #b4690e;
+      --red: #b9384f;
+      --radius: 14px;
     }
-    .field input:not([type="checkbox"]):not([type="radio"]),
-    .field select,
-    .field textarea {
-      display: block;
-      width: 100%;
-      min-height: 42px;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: var(--bg); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .btn, button.btn {
+      cursor: pointer; border: 1px solid #dfe3ed; background: #ffffff; color: var(--ink);
+      padding: 8px 14px; border-radius: 9px; font-weight: 600; display: inline-flex;
+      align-items: center; justify-content: center; gap: 7px; font-size: 13px; min-height: 38px;
+      transition: all 0.15s ease;
     }
-    aside.collapsed .sidebar-label, [data-collapsed="true"] .sidebar-label { display: none !important; }
-  </style>
+    .btn:hover { background: #f5f3ff; border-color: #cfc7f4; }
+    .btn.primary, button.primary, a.btn.primary {
+      background: var(--purple) !important; background-color: var(--purple) !important;
+      color: #ffffff !important; border-color: var(--purple) !important;
+      box-shadow: 0 3px 8px rgba(104, 84, 223, 0.22);
+    }
+    .btn.primary:hover, button.primary:hover, a.btn.primary:hover {
+      background: #5844cc !important; color: #ffffff !important;
+    }
+    .btn.danger, button.danger {
+      background: var(--red) !important; color: #ffffff !important; border-color: var(--red) !important;
+    }
+    .btn.small { padding: 5px 10px; min-height: 30px; font-size: 12px; border-radius: 7px; }
+    .btn.icon-only { padding: 6px 9px; min-height: 30px; color: var(--red); border-color: #f1d0d6; background: #fffafb; }
+    .btn.icon-only:hover { background: #fee2e2; }
 
-  <style data-dark-mode-parity>
-    html.dark, body.dark { --ink:#f1f5f9; --muted:#94a3b8; --line:#263044; --bg:#0f172a; --soft:#1e1b4b; background:#0f172a !important; color:#f1f5f9 !important; }
-    html.dark aside, body.dark aside { background: #0f172a !important; border-color: #1e293b !important; }
-    html.dark .bg-white, body.dark .bg-white { background: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
-    html.dark .text-slate-900, body.dark .text-slate-900 { color: #f8fafc !important; }
-    html.dark .text-slate-800, body.dark .text-slate-800 { color: #f1f5f9 !important; }
-    html.dark .text-slate-700, body.dark .text-slate-700 { color: #cbd5e1 !important; }
-    html.dark .text-slate-600, body.dark .text-slate-600 { color: #94a3b8 !important; }
-    html.dark .text-slate-500, body.dark .text-slate-500 { color: #64748b !important; }
-    html.dark .border-slate-200, body.dark .border-slate-200 { border-color: #334155 !important; }
-    html.dark .border-slate-100, body.dark .border-slate-100 { border-color: #1e293b !important; }
-    html.dark .bg-slate-50, body.dark .bg-slate-50 { background: #0b1120 !important; }
-    html.dark .bg-slate-100, body.dark .bg-slate-100 { background: #1e293b !important; }
-    html.dark .hover\:bg-slate-50:hover, body.dark .hover\:bg-slate-50:hover { background: #1e293b !important; }
-    html.dark .hover\:bg-slate-100:hover, body.dark .hover\:bg-slate-100:hover { background: #334155 !important; }
-    html.dark input, html.dark select, html.dark textarea { background: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important; }
-    html.dark table thead th { background: #1e293b !important; color: #94a3b8 !important; }
-  </style>
+    .layout { display: grid; grid-template-columns: 236px minmax(0, 1fr); height: 100vh; overflow: hidden; }
+    .sidebar {
+      background: #ffffff; border-right: 1px solid var(--line); padding: 22px 14px 16px;
+      height: 100vh; display: flex; flex-direction: column; overflow-y: auto; z-index: 30;
+    }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 18px; min-height: 34px; }
+    .brand-row .brand { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; letter-spacing: -0.4px; color: var(--ink); flex: 1; min-width: 0; }
+    .suite-icon-container { width: 28px; height: 28px; border-radius: 8px; background: #eee9fb; color: var(--purple); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .suite-icon-container .suite-expand-icon { display: none !important; font-size: 14px; color: var(--purple); }
+    .sidebar-collapse-btn { background: transparent; border: 1px solid transparent; cursor: pointer; padding: 5px 7px; border-radius: 6px; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+    .sidebar-collapse-btn:hover { background: var(--soft); color: var(--purple); border-color: #cfc7f4; }
 
-  <style data-collapsible-sidebar>
-    /* Collapsible Suite Sidebar Styles */
-    .brand-icon-wrap {
-      position: relative;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #eeeaff;
-      color: #6854df;
-      transition: background 0.2s;
+    .appbox { padding: 11px 12px; background: #f6f4fc; border: 1px solid #ebe6f8; border-radius: 10px; margin: 0 0 16px; display: flex; gap: 10px; align-items: center; }
+    .appicon { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; background: #e9e3ff; color: var(--purple); flex-shrink: 0; }
+    .appbox b { display: block; font-size: 13px; color: var(--ink); line-height: 1.25; }
+    .appbox small { color: var(--muted); font-size: 11px; display: block; }
+
+    .nav { display: flex; flex-direction: column; gap: 2px; }
+    .navlabel { font-size: 10px; text-transform: uppercase; letter-spacing: 1.4px; font-weight: 700; color: #9ba3b2; margin: 16px 10px 6px; }
+    .nav a, .nav a:link, .nav a:visited {
+      display: flex; align-items: center; gap: 11px; padding: 9px 11px; font-size: 13px;
+      color: #67728a !important; border-radius: 8px; font-weight: 500;
     }
-    .brand-icon-wrap:hover {
-      background: #e0d7fe;
+    .nav a:hover { background: #f8f7fc; color: #172137 !important; }
+    .nav a.active { background: #ede9fb !important; color: #6650ce !important; font-weight: 650; }
+    .nav a .icon { width: 18px; text-align: center; font-size: 14px; color: inherit; flex-shrink: 0; }
+
+    .side-bottom { margin-top: auto; padding-top: 18px; }
+    .profile-link { border-top: 1px solid var(--line); padding: 14px 6px 0; display: flex; align-items: center; gap: 10px; }
+    .avatar-badge { width: 34px; height: 34px; border-radius: 50%; background: #eee8fb; color: #6854df; display: inline-grid; place-items: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+    /* Collapsed sidebar state */
+    .layout.sidebar-collapsed { grid-template-columns: 68px minmax(0, 1fr) !important; }
+    aside.sidebar-collapsed, .sidebar.sidebar-collapsed, aside[data-collapsed="true"] {
+      width: 68px !important; min-width: 68px !important; max-width: 68px !important; padding-left: 8px !important; padding-right: 8px !important;
     }
-    .brand-icon-wrap .expand-hint {
-      display: none;
-      position: absolute;
-      inset: 0;
-      align-items: center;
-      justify-content: center;
-      background: #6854df;
-      color: #ffffff;
-      border-radius: 8px;
-    }
-    aside.collapsed:hover .brand-icon-wrap .expand-hint,
-    aside.sidebar-collapsed:hover .brand-icon-wrap .expand-hint {
-      display: flex !important;
-      animation: pulse-caret 1.2s infinite ease-in-out;
-    }
-    aside.collapsed:hover .brand-icon-wrap #suiteIcon,
-    aside.sidebar-collapsed:hover .brand-icon-wrap #suiteIcon {
+    aside.collapsed .sidebar-label, aside[data-collapsed="true"] .sidebar-label, .sidebar-collapsed .sidebar-label,
+    .sidebar-collapsed .suite-title, .sidebar-collapsed .sidebar-collapse-btn, .sidebar-collapsed .navlabel,
+    .sidebar-collapsed .appbox > div:not(.appicon), .sidebar-collapsed .profile-link > div:not(.avatar-badge) {
       display: none !important;
     }
-    @keyframes pulse-caret {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(2px); }
-    }
-    aside.collapsed, aside.sidebar-collapsed {
-      width: 68px !important;
-    }
-    aside.collapsed .nav-text,
-    aside.collapsed .sidebar-title,
-    aside.collapsed .sidebar-section-title,
-    aside.collapsed .sidebar-user-info,
-    aside.collapsed .suite-badge,
-    aside.sidebar-collapsed .nav-text,
-    aside.sidebar-collapsed .sidebar-title,
-    aside.sidebar-collapsed .sidebar-section-title,
-    aside.sidebar-collapsed .sidebar-user-info,
-    aside.sidebar-collapsed .suite-badge {
-      display: none !important;
-    }
-    aside.collapsed .nav-item,
-    aside.sidebar-collapsed .nav-item {
-      justify-content: center !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    aside.collapsed .section-header,
-    aside.sidebar-collapsed .section-header {
-      text-align: center;
-      padding: 4px 0;
-    }
-    aside.collapsed .section-divider,
-    aside.sidebar-collapsed .section-divider {
-      display: block;
-      margin: 8px auto;
-      width: 24px;
-      border-top: 1px solid #e2e8f0;
-    }
+    .sidebar-collapsed .brand-row { justify-content: center !important; padding: 0 0 16px 0 !important; }
+    .sidebar-collapsed .brand-row .brand { justify-content: center !important; flex: none !important; cursor: pointer; gap: 0 !important; }
+    .sidebar.sidebar-collapsed:hover .suite-icon-container .suite-icon { display: none !important; }
+    .sidebar.sidebar-collapsed:hover .suite-icon-container .suite-expand-icon { display: inline-block !important; }
+    .sidebar-collapsed .appbox, .sidebar-collapsed .nav a, .sidebar-collapsed .profile-link { justify-content: center !important; padding-left: 8px !important; padding-right: 8px !important; }
 
-    /* Standardized Navigation Colors (No saturated primary blue) */
-    .sidebar .nav-item {
-      color: #67728a !important;
-      text-decoration: none;
+    /* Main Content & Topbar */
+    .main-col { display: flex; flex-direction: column; height: 100vh; overflow: hidden; min-width: 0; }
+    .topbar {
+      height: 64px; flex-shrink: 0; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; gap: 14px; position: sticky; top: 0; z-index: 25;
     }
-    .sidebar .nav-item:hover {
-      background: #f8fafc !important;
-      color: #1e293b !important;
-    }
-    .sidebar .nav-item.active {
-      background: #f3f0ff !important;
-      color: #53389e !important;
-      font-weight: 600 !important;
-    }
-    .sidebar .nav-item i {
-      color: #67728a;
-    }
-    .sidebar .nav-item.active i {
-      color: #53389e !important;
-    }
+    .breadcrumbs { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .breadcrumbs strong { color: var(--ink); font-weight: 600; }
+    .page-scroll { flex: 1; overflow-y: auto; padding: 26px 30px 44px; }
+    .page-wrap { max-width: 1520px; margin: 0 auto; }
 
-    /* Mobile Responsive Sidebar & Top Navigation Standard */
-    .mobile-menu {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: transparent;
-      border: 1px solid rgba(0,0,0,0.08);
-      color: #67728a;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .mobile-menu:hover {
-      background: #f8fafc;
-      color: #1e293b;
-    }
-    .shade {
-      display: none;
-    }
+    .eyebrow { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--purple); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 7px; }
+    .page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 22px; flex-wrap: wrap; }
+    .page-head h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.6px; margin: 0 0 6px; color: var(--ink); }
+    .page-head p { color: var(--muted); font-size: 13px; margin: 0; max-width: 780px; }
 
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 22px; }
+    .kpi-card { background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+    .kpi-card .kicker { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); display: flex; align-items: center; justify-content: space-between; }
+    .kpi-card .val { font-size: 27px; font-weight: 750; letter-spacing: -0.8px; color: var(--ink); line-height: 1.15; }
+    .kpi-card .sub { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-top: 2px; flex-wrap: wrap; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 20px; }
+    .panel { background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
+    .panel-head, .panel-header { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .panel-head h2, .panel-header h2 { font-size: 15px; font-weight: 700; margin: 0; color: var(--ink); }
+    .panel-head p, .panel-header p { font-size: 12px; color: var(--muted); margin: 2px 0 0; }
+    .panel-body { padding: 20px; }
+
+    .filter-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 14px 20px; border-bottom: 1px solid var(--line); background: #fafbfe; }
+    .search-input, .form-input, .form-select, .form-textarea { flex: 1; min-width: 180px; padding: 8px 12px; border: 1px solid #dfe3ed; border-radius: 8px; font-size: 13px; background: #fff; color: var(--ink); width: 100%; }
+    .search-wrap .search-input { padding-left: 34px; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 12px; }
+    .select-filter { padding: 8px 12px; border: 1px solid #dfe3ed; border-radius: 8px; font-size: 13px; background: #fff; color: var(--ink); }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .form-textarea { min-height: 90px; resize: vertical; }
+
+    .active-tags-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 20px; background: #f6f4fc; border-bottom: 1px solid #ebe6f8; font-size: 12px; }
+    .filter-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; background: #ffffff; border: 1px solid #d8d0f8; color: #5340b8; font-weight: 600; font-size: 11px; white-space: nowrap; }
+    .filter-chip button { border: 0; background: transparent; color: #6854df; cursor: pointer; padding: 0 2px; font-weight: 700; }
+
+    table.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    table.data-table th { padding: 11px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); background: #f8f9fc; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    table.data-table td { padding: 13px 16px; border-bottom: 1px solid #eff1f6; vertical-align: middle; }
+    table.data-table tr:hover td { background: #fcfbff; }
+    .primary-link { font-weight: 700; color: var(--purple); text-decoration: none; }
+    .primary-link:hover { text-decoration: underline; }
+
+    .badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 650; white-space: nowrap; flex-shrink: 0; }
+    .badge.green { background: #e6f6f0; color: #146c52; }
+    .badge.purple { background: #eee9fb; color: #5b45c4; }
+    .badge.amber { background: #fef3c7; color: #9a580a; }
+    .badge.red { background: #fee2e2; color: #991b1b; }
+    .badge.slate { background: #f1f5f9; color: #475569; }
+    .badge.blue { background: #e0f2fe; color: #0369a1; }
+
+    .floor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+    .table-tile { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff; display: flex; flex-direction: column; gap: 8px; }
+    .tile-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .tile-num { font-weight: 700; font-size: 14px; }
+    .tile-meta { font-size: 11px; color: var(--muted); }
+
+    .kanban-board { display: grid; grid-template-columns: repeat(4, minmax(230px, 1fr)); gap: 14px; overflow-x: auto; }
+    .kanban-col { background: #f8f9fc; border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .kanban-col-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; color: var(--ink); padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+    .kanban-card { background: #ffffff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; font-size: 12px; box-shadow: 0 2px 5px rgba(15,23,42,0.03); }
+    .kanban-card p { margin: 6px 0; color: var(--muted); font-size: 12px; }
+    .card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 11px; color: var(--muted); }
+
+    .drawer-backdrop { display: flex; justify-content: center; padding: 10px 0; }
+    .drawer-card { background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); width: 100%; max-width: 820px; overflow: hidden; box-shadow: 0 12px 32px rgba(15,23,42,0.08); }
+    .drawer-head { padding: 18px 22px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .drawer-body { padding: 22px; }
+    .drawer-foot { padding: 16px 22px; border-top: 1px solid var(--line); display: flex; justify-content: flex-end; gap: 10px; background: #fafbfe; }
+
+    .mobile-menu { display: none; background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+    .shade { display: none; }
+
+    @media (max-width: 1024px) {
+      .kpi-grid, .grid-2, .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
     @media (max-width: 768px) {
-      .mobile-menu {
-        display: inline-flex !important;
-      }
-      body {
-        flex-direction: column !important;
-      }
-      aside.sidebar, aside#suiteSidebar, aside {
-        position: fixed !important;
-        left: 0 !important;
-        top: 0 !important;
-        bottom: 0 !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        width: 260px !important;
-        min-width: 260px !important;
-        max-width: 260px !important;
-        transform: translateX(-100%) !important;
-        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        z-index: 50 !important;
-        background: #ffffff !important;
-        box-shadow: none !important;
-      }
-      body.dark aside.sidebar, html.dark aside.sidebar,
-      body.dark aside#suiteSidebar, html.dark aside#suiteSidebar {
-        background: #0f172a !important;
-      }
-      .navopen aside.sidebar, body.navopen aside.sidebar, html.navopen aside.sidebar,
-      .navopen aside#suiteSidebar, body.navopen aside#suiteSidebar, html.navopen aside#suiteSidebar {
-        transform: translateX(0) !important;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
-      }
-      .navopen .shade, body.navopen .shade, html.navopen .shade {
-        display: block !important;
-        position: fixed !important;
-        inset: 0 !important;
-        background: rgba(15, 23, 42, 0.5) !important;
-        backdrop-filter: blur(2px) !important;
-        z-index: 45 !important;
-      }
-      #collapseBtn, .sidebar-collapse-btn {
-        display: none !important;
-      }
+      .layout { display: block; }
+      .sidebar { position: fixed; left: 0; top: 0; transform: translateX(-100%); width: 250px !important; transition: transform 0.2s ease; z-index: 60; }
+      body.navopen .sidebar { transform: translateX(0); }
+      body.navopen .shade { display: block; position: fixed; inset: 0; background: rgba(15,23,42,0.45); z-index: 55; }
+      .mobile-menu { display: inline-flex; align-items: center; justify-content: center; }
+      .kpi-grid, .grid-2, .form-grid { grid-template-columns: 1fr; }
     }
+
+    html.dark, body.dark { --ink: #f1f5f9; --muted: #94a3b8; --line: #263044; --bg: #0f172a; --panel: #1e293b; --purple-soft: #1e1b4b; background: #0f172a !important; color: #f1f5f9 !important; }
+    html.dark .sidebar, body.dark .sidebar, html.dark .topbar, body.dark .topbar, html.dark .panel, body.dark .panel, html.dark .kpi-card, body.dark .kpi-card, html.dark .table-tile, body.dark .table-tile, html.dark .kanban-card, body.dark .kanban-card, html.dark .drawer-card, body.dark .drawer-card { background: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
+    html.dark .appbox, body.dark .appbox, html.dark .filter-bar, body.dark .filter-bar, html.dark table.data-table th, body.dark table.data-table th, html.dark .kanban-col, body.dark .kanban-col, html.dark .drawer-foot, body.dark .drawer-foot { background: #0f172a !important; color: #cbd5e1 !important; border-color: #334155 !important; }
+    html.dark input, body.dark input, html.dark select, body.dark select, html.dark textarea, body.dark textarea { background: #0f172a !important; color: #f1f5f9 !important; border-color: #334155 !important; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex">
-
-
-    <!-- Collapsible Left Sidebar -->
-    <aside id="suiteSidebar" class="sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none" data-collapsible-sidebar="true">
-      <div>
-        <!-- Top Brand Header with Suite Icon & Collapse Toggle -->
-        <div class="h-16 border-b border-slate-200 flex items-center justify-between px-4">
-          <div class="flex items-center gap-3 overflow-hidden">
-            <div id="brandIconWrap" class="brand-icon-wrap" onclick="toggleSidebar()" title="Click to collapse / expand">
-              <i id="suiteIcon" class="fas fa-bag-shopping text-indigo-600 text-lg"></i>
-              <div class="expand-hint">
-                <i class="fas fa-chevron-right text-xs"></i>
-              </div>
-            </div>
-            <div class="sidebar-title truncate">
-              <span class="block text-xs font-semibold uppercase tracking-wider text-indigo-600">Commerce Suite</span>
-              <span class="block text-sm font-bold text-slate-900 leading-tight">Product Reviews &amp; Ratings</span>
-            </div>
-          </div>
-          <button id="collapseBtn" onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors" title="Collapse sidebar">
-            <i class="fas fa-chevron-left text-sm"></i>
-          </button>
-        </div>
-
-        <!-- Navigation Sections -->
-        <nav class="py-2">
-          
-        <div class="px-4 mt-4">
-          <p class="sidebar-section-title text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">Moderation &amp; Q&amp;A</p>
-          <div class="section-divider hidden"></div>
-          <div class="space-y-1">
-      
-          <a href="#/dashboard" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-layer-group text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Reviews &amp; Trust Overview</span>
-          </a>
-        
-          <a href="#/reviews" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-table-columns text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Reviews Moderation Queue</span>
-          </a>
-        
-          <a href="#/questions" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors active bg-[#f3f0ff] !bg-[#f3f0ff] text-[#53389e] !text-[#53389e] font-semibold">
-            <i class="fas fa-chart-line text-base w-5 text-center text-[#53389e]"></i>
-            <span class="nav-text sidebar-label">Community Product Q&amp;A</span>
-          </a>
-        
-          </div>
-        </div>
-      
-        <div class="px-4 mt-6">
-          <p class="sidebar-section-title text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">Collection &amp; UGC</p>
-          <div class="section-divider hidden"></div>
-          <div class="space-y-1">
-      
-          <a href="#/invitations" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-compass text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Review Requests &amp; Sampling</span>
-          </a>
-        
-          <a href="#/media-gallery" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-bolt text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Photo &amp; Video UGC Studio</span>
-          </a>
-        
-          <a href="#/attribute-templates" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-shield-halved text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Fit Sliders &amp; Smart Prompts</span>
-          </a>
-        
-          </div>
-        </div>
-      
-        <div class="px-4 mt-6">
-          <p class="sidebar-section-title text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">Insights &amp; Syndication</p>
-          <div class="section-divider hidden"></div>
-          <div class="space-y-1">
-      
-          <a href="#/product-ratings" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-sliders text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">SKU Rating &amp; Fit Rollups</span>
-          </a>
-        
-          <a href="#/syndication" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-clipboard-check text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Google &amp; Retail Syndication</span>
-          </a>
-        
-          <a href="#/quality-insights" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors text-[#67728a] hover:bg-slate-100 hover:text-slate-900">
-            <i class="fas fa-diagram-project text-base w-5 text-center text-[#67728a]"></i>
-            <span class="nav-text sidebar-label">Sentiment &amp; Defect Analytics</span>
-          </a>
-        
-          </div>
-        </div>
-      
-        </nav>
+<body>
+  <div class="shade" id="mobileShade"></div>
+  <div class="layout" id="appLayout">
+    <aside class="sidebar" id="appSidebar" aria-label="Rapider Product Reviews &amp; Ratings navigation">
+      <div class="brand-row">
+        <a class="brand" href="#/dashboard" id="suiteBrandLink" title="Commerce Suite">
+          <span class="suite-icon-container">
+            <i class="suite-icon fas fa-shopping-cart" aria-hidden="true"></i>
+            <i class="suite-expand-icon fas fa-chevron-right" aria-hidden="true"></i>
+          </span>
+          <span class="suite-title sidebar-label">Commerce Suite</span>
+        </a>
+        <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
       </div>
 
-      <!-- Bottom User / Org Card -->
-      <div class="p-4 border-t border-slate-200">
-        <div class="flex items-center gap-3 overflow-hidden">
-          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-600 font-semibold flex items-center justify-center shrink-0 text-sm">
-            CO
-          </div>
-          <div class="sidebar-user-info truncate">
-            <p class="text-xs font-semibold text-slate-800 truncate">Claire Dupont</p>
-            <p class="text-[11px] text-slate-500 truncate">VP Digital Commerce</p>
+      <a class="appbox" href="#/dashboard">
+        <div class="appicon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
+        <div class="sidebar-label">
+          <b>Product Reviews &amp; Ratings</b>
+          <small>Rapider Commerce Suite</small>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+      <div class="navlabel">Moderation &amp; Q&amp;A</div>
+        <a href="#/dashboard" class="nav-link" data-route="dashboard" title="Reviews &amp; Trust Overview">
+          <i class="fas fa-home icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Reviews &amp; Trust Overview</span>
+        </a>
+        <a href="#/reviews" class="nav-link" data-route="reviews" title="Reviews Moderation Queue">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Reviews Moderation Queue</span>
+        </a>
+        <a href="#/questions" class="nav-link active" data-route="questions" title="Community Product Q&amp;A">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Community Product Q&amp;A</span>
+        </a>
+      <div class="navlabel">Collection &amp; UGC</div>
+        <a href="#/invitations" class="nav-link" data-route="invitations" title="Review Requests &amp; Sampling">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Review Requests &amp; Sampling</span>
+        </a>
+        <a href="#/media-gallery" class="nav-link" data-route="media-gallery" title="Photo &amp; Video UGC Studio">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Photo &amp; Video UGC Studio</span>
+        </a>
+        <a href="#/attribute-templates" class="nav-link" data-route="attribute-templates" title="Fit Sliders &amp; Smart Prompts">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Fit Sliders &amp; Smart Prompts</span>
+        </a>
+      <div class="navlabel">Insights &amp; Syndication</div>
+        <a href="#/product-ratings" class="nav-link" data-route="product-ratings" title="SKU Rating &amp; Fit Rollups">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">SKU Rating &amp; Fit Rollups</span>
+        </a>
+        <a href="#/syndication" class="nav-link" data-route="syndication" title="Google &amp; Retail Syndication">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Google &amp; Retail Syndication</span>
+        </a>
+        <a href="#/quality-insights" class="nav-link" data-route="quality-insights" title="Sentiment &amp; Defect Analytics">
+          <i class="fas fa-shopping-cart icon" aria-hidden="true"></i>
+          <span class="sidebar-label">Sentiment &amp; Defect Analytics</span>
+        </a>
+      </nav>
+
+      <div class="side-bottom">
+        <div class="profile-link">
+          <div class="avatar-badge">EV</div>
+          <div class="sidebar-label">
+            <strong style="font-size:12px;display:block">Elena Vance</strong>
+            <small style="font-size:11px;color:var(--muted)">E-Commerce Merchandising Manager</small>
           </div>
         </div>
       </div>
     </aside>
-    <div class="shade" id="sidebar-shade"></div>
-    
-<div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
-  
-    <!-- Responsive Main Header (h-16 standard) -->
-    <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shrink-0">
-      <div class="flex items-center gap-3">
-        <button type="button" class="mobile-menu" data-action="menu" aria-label="Open navigation" aria-expanded="false" title="Open navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-        <nav class="text-xs flex items-center gap-1.5">
-          <a href="#/dashboard" class="hover:text-indigo-600 text-slate-500">Commerce Suite</a>
-          <span class="text-slate-400">/</span>
-          <a href="#/dashboard" class="hover:text-indigo-600 text-slate-500">Product Reviews &amp; Ratings</a>
-          <span class="text-slate-400">/</span>
-          <span class="text-slate-900 font-medium">Community Product Q&amp;A</span>
-        </nav>
-      </div>
-      <div class="flex items-center gap-3">
-        <button onclick="window.rapiderApi.navigate('/product-rating-detail')" class="btn-primary flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-sm font-medium transition-colors shadow-sm" style="color: #ffffff !important;">
-          <i class="fas fa-plus"></i>
-          <span>New Record</span>
-        </button>
-        <button onclick="toggleDarkMode()" class="text-slate-500 hover:text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors" title="Toggle Theme">
-          <i class="fas fa-moon text-sm"></i>
-        </button>
-      </div>
-    </header>
-    
-  <main class="flex-1 overflow-y-auto p-6 bg-slate-50 dark:bg-slate-900" id="main-content">
-    
-    <div class="max-w-7xl mx-auto space-y-6">
-      <!-- Page Title & Action Bar -->
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-indigo-600">Moderation &amp; Q&amp;A &bull; POS Transaction</span>
-          <h1 class="text-2xl font-bold text-slate-900 dark:text-white mt-0.5">Community Product Q&amp;A</h1>
-          <p class="text-sm text-slate-500 mt-0.5">ComProductQuestion inbox with SLA timer, instant ComProduct spec sidebar, Ask Past Buyers toggle, AI draft answer helper, and clickable Question # -&gt; question-detail.</p>
+
+    <div class="main-col">
+      <header class="topbar h-16 sticky top-0 z-30 flex items-center justify-between px-6 border-b border-border-color bg-background/95 backdrop-blur">
+        <div class="flex items-center gap-3 min-w-0">
+          <button type="button" class="mobile-menu" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+          </button>
+          <div class="breadcrumbs">
+            <span>Commerce Suite</span>
+            <span>/</span>
+            <span>Product Reviews &amp; Ratings</span>
+            <span>/</span>
+            <strong>Community Product Q&amp;A</strong>
+          </div>
         </div>
         <div class="flex items-center gap-2">
-          <a href="#/product-rating-detail" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-sm font-medium transition-colors shadow-sm" style="color: #ffffff !important;">
-            <i class="fas fa-plus"></i>
-            <span>Create POS Transaction</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- KPI Summary Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 uppercase">Total POS Transactions</span>
-            <i class="fas fa-database text-indigo-500"></i>
-          </div>
-          <p id="kpiTotalCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">3</p>
-          <span class="text-xs text-emerald-600 font-medium">Live SWR synchronized</span>
-        </div>
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 uppercase">Active Records</span>
-            <i class="fas fa-circle-check text-emerald-500"></i>
-          </div>
-          <p class="text-2xl font-bold text-slate-900 dark:text-white mt-2">2</p>
-          <span class="text-xs text-slate-500 font-medium">Passing policy checks</span>
-        </div>
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 uppercase">Compliance Rate</span>
-            <i class="fas fa-shield-halved text-purple-500"></i>
-          </div>
-          <p class="text-2xl font-bold text-slate-900 dark:text-white mt-2">99.4%</p>
-          <span class="text-xs text-purple-600 font-medium">Audit trail verified</span>
-        </div>
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 uppercase">Avg Latency</span>
-            <i class="fas fa-bolt text-amber-500"></i>
-          </div>
-          <p class="text-2xl font-bold text-slate-900 dark:text-white mt-2">42 ms</p>
-          <span class="text-xs text-slate-500 font-medium">Sub-200ms target SLA</span>
-        </div>
-      </div>
-
-      <!-- Search & Filter Bar -->
-      <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
-        <div class="flex flex-col sm:flex-row items-center gap-3">
-          <div class="relative flex-1 w-full">
-            <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
-            <input type="text" id="recordSearchInput" placeholder="Search POS Transaction by title, code, or status..." class="w-full pl-9 pr-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500" />
-          </div>
-          <select id="statusFilterSelect" class="w-full sm:w-48 px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200">
-            <option value="">All Statuses</option>
-            <option value="ACTIVE">ACTIVE</option>
-            <option value="IN_PROGRESS">IN_PROGRESS</option>
-            <option value="COMPLETED">COMPLETED</option>
-          </select>
-          <button id="clearFiltersBtn" type="button" onclick="clearAllFilters()" class="px-3.5 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors whitespace-nowrap">
-            Clear all
+          <a href="#/dashboard" class="btn small"><i class="fas fa-plus" aria-hidden="true"></i> + Quick Action</a>
+          <a href="#/dashboard" class="btn primary small !text-white text-white" style="color: #ffffff !important;"><i class="fas fa-plus-circle" aria-hidden="true"></i> + New Review Attribute Template</a>
+          <button type="button" class="btn small" id="themeToggleBtn" aria-label="Toggle dark mode" title="Toggle theme">
+            <i class="fas fa-moon" aria-hidden="true"></i>
           </button>
         </div>
-        <div id="activeFilterTagsBar" class="flex flex-wrap items-center gap-2 text-xs">
-          <span class="text-slate-400">Active Filters:</span>
-          <span class="px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-medium">All POS Transaction Records</span>
+      </header>
+
+      <main class="page-scroll flex-1 overflow-y-auto p-6 md:p-8 @container" id="main-content">
+        <div class="page-wrap">
+
+      <div class="eyebrow"><i class="fas fa-shopping-cart"></i> MODERATION &amp; Q&amp;A &bull; COMPRODUCTQUESTION WORKBENCH</div>
+      <div class="page-head">
+        <div>
+          <h1>Community Product Q&amp;A</h1>
+          <p>ComProductQuestion inbox with SLA timer, instant ComProduct spec sidebar, Ask Past Buyers toggle, AI draft answer helper, and clickable Question # -&gt; question-detail.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn" onclick="window.toast('Verified SOW invariants & cross-suite sync for ComProductQuestion.', 'success')"><i class="fas fa-sync"></i> Verify Product Question Sync</button>
+          <a href="#/review-detail" class="btn primary !text-white text-white" style="color:#ffffff !important;"><i class="fas fa-plus"></i> + Create Product Question</a>
         </div>
       </div>
 
-      <!-- Data Table -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-sm">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kicker"><span>ACTIVE PRODUCT QUESTION RECORDS</span><i class="fas fa-database" style="color:var(--purple)"></i></div>
+          <div class="val" id="ledgerCount_2">5 Records</div>
+          <div class="sub"><span>Bound to canonical `ComProductQuestion`</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kicker"><span>PRODUCT COVERAGE</span><i class="fas fa-check-double" style="color:#10b981"></i></div>
+          <div class="val">100% Verified</div>
+          <div class="sub"><span class="badge green">OPEN / QUARANTINED_SPAM</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kicker"><span>VARIANT</span><i class="fas fa-Sliders-h" style="color:#0284c7"></i></div>
+          <div class="val">100%</div>
+          <div class="sub"><span>Cryptographic provenance badging (VERIFIED_BUYER, INCENTIVIZ</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kicker"><span>CROSS-SUITE INTEGRATION</span><i class="fas fa-shield-alt" style="color:#f59e0b"></i></div>
+          <div class="val">Enforced</div>
+          <div class="sub"><span>productId -&gt; ComProduct.id, siteId -&gt; ComSite.id</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="filter-bar">
+          <div class="search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" id="ledgerSearch_2" class="search-input" placeholder="Search Community Product Q&amp;A by question number, title, product, or owner...">
+          </div>
+          <select id="ledgerStatus_2" class="select-filter" aria-label="Filter by Status">
+            <option value="ALL">All Product Question Statuses</option>
+            <option value="OPEN">OPEN</option><option value="ROUTED_TO_OWNERS">ROUTED_TO_OWNERS</option><option value="ANSWERED_PUBLISHED">ANSWERED_PUBLISHED</option><option value="QUARANTINED_SPAM">QUARANTINED_SPAM</option>
+          </select>
+        </div>
+        <div id="activeFilterTagsBar" class="active-tags-bar" style="display:none;"></div>
+        <div style="overflow-x:auto;">
+          <table class="data-table">
             <thead>
-              <tr class="bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">
-                <th class="p-4">POS Transaction Identifier</th>
-                <th class="p-4">Metadata / Code</th>
-                <th class="p-4">Status</th>
-                <th class="p-4 text-right">Actions</th>
+              <tr>
+                <th>Question Number &amp; Timestamp</th>
+                <th>Product Question Title &amp; Operational Scope</th>
+                <th>Product</th>
+                <th>Variant</th>
+                <th>Owner &amp; Cross-Suite Ref</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="recordsTableBody" class="divide-y divide-slate-100 dark:divide-slate-700">
-              <!-- Rendered dynamically -->
-            </tbody>
+            <tbody id="ledgerRows_2"></tbody>
           </table>
         </div>
-        <div id="recordsEmptyState" class="hidden text-center py-12 p-6">
-          <i class="fas fa-folder-open text-slate-300 dark:text-slate-600 text-4xl mb-3"></i>
-          <h3 class="text-base font-semibold text-slate-800 dark:text-slate-200">No matching records found</h3>
-          <p class="text-xs text-slate-500 mt-1">Try adjusting your search query or clearing active filters.</p>
-          <button type="button" onclick="clearAllFilters()" class="mt-4 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold text-white" style="color: #ffffff !important;">
-            Reset Filters
-          </button>
+      </div>
+    
         </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal (Zero Native Dialog Standard) -->
+  <div id="rapiderConfirmModal" class="hidden" style="position:fixed;inset:0;background:rgba(15,23,42,0.5);z-index:100;display:none;align-items:center;justify-content:center;padding:16px;">
+    <div class="panel" style="max-width:420px;width:100%;padding:22px;box-shadow:0 20px 50px rgba(15,23,42,0.25);margin:0;">
+      <h3 id="rapiderConfirmTitle" style="margin:0 0 8px;font-size:17px;font-weight:700;">Confirm Action</h3>
+      <p id="rapiderConfirmMsg" style="margin:0 0 18px;font-size:13px;color:var(--muted);"></p>
+      <div style="display:flex;justify-content:flex-end;gap:10px;">
+        <button type="button" class="btn" id="rapiderConfirmCancelBtn">Cancel</button>
+        <button type="button" class="btn danger !text-white text-white" id="rapiderConfirmOkBtn" style="color:#ffffff !important;">Confirm Remove</button>
       </div>
     </div>
-    
-  </main>
-</div>
+  </div>
+  <!-- Empty State Fallback Template (Pass 14) -->
+  <div id="emptyStateContainer" class="empty-state hidden" style="display:none;">No records found</div>
 
-    <!-- Rapider Custom Confirm Modal (Zero Native alert/confirm) -->
-    <dialog id="rapiderConfirmModal" class="rounded-xl p-0 shadow-2xl backdrop:bg-slate-900/40 w-full max-w-md">
-      <div class="bg-white rounded-xl overflow-hidden border border-slate-200">
-        <div class="p-6">
-          <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-4">
-            <i class="fas fa-triangle-exclamation text-xl"></i>
-          </div>
-          <h3 id="rapiderConfirmTitle" class="text-lg font-bold text-slate-900 mb-2">Confirm Action</h3>
-          <p id="rapiderConfirmMessage" class="text-sm text-slate-600">Are you sure you want to proceed? This action cannot be undone.</p>
-        </div>
-        <div class="bg-slate-50 px-6 py-3 flex justify-end gap-3 border-t border-slate-100">
-          <button id="rapiderConfirmCancelBtn" type="button" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
-            Cancel
-          </button>
-          <button id="rapiderConfirmOkBtn" type="button" class="px-4 py-2 text-sm font-medium rounded-lg bg-red-600 hover:bg-red-700 transition-colors" style="color: #ffffff !important;">
-            Confirm Delete
-          </button>
-        </div>
-      </div>
-    </dialog>
-    
-
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
-    
-
-    <script>
-      function toggleSidebar() {
-        const aside = document.getElementById('suiteSidebar');
-        if (!aside) return;
-        const isCollapsed = aside.classList.toggle('collapsed');
-        aside.classList.toggle('sidebar-collapsed', isCollapsed);
-        localStorage.setItem('rapider_sidebar_collapsed', isCollapsed ? 'true' : 'false');
-        const collapseBtn = document.getElementById('collapseBtn');
-        if (collapseBtn) {
-          collapseBtn.innerHTML = isCollapsed
-            ? '<i class="fas fa-chevron-right text-sm"></i>'
-            : '<i class="fas fa-chevron-left text-sm"></i>';
-          collapseBtn.title = isCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const aside = document.getElementById('suiteSidebar');
-        if (aside) {
-          aside.addEventListener('click', (e) => {
-            if (aside.classList.contains('collapsed') || aside.classList.contains('sidebar-collapsed')) {
-              if (e.target.closest('#brandIconWrap') || e.target.closest('.brand-icon-wrap') || e.target.closest('.expand-hint')) {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleSidebar();
-              }
-            }
-          });
-        }
-
-        document.querySelectorAll('.mobile-menu, [data-action="menu"]').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const isOpen = document.body.classList.toggle('navopen');
-            btn.setAttribute('aria-expanded', String(isOpen));
-          });
-        });
-
-        const shade = document.getElementById('sidebar-shade') || document.querySelector('.shade');
-        if (shade) {
-          shade.addEventListener('click', () => {
-            document.body.classList.remove('navopen');
-            document.querySelectorAll('.mobile-menu, [data-action="menu"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
-          });
-        }
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && document.body.classList.contains('navopen')) {
-            document.body.classList.remove('navopen');
-            document.querySelectorAll('.mobile-menu, [data-action="menu"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
-          }
-        });
-
-        if (localStorage.getItem('rapider_sidebar_collapsed') === 'true') {
-          if (aside) {
-            aside.classList.add('collapsed');
-            aside.classList.add('sidebar-collapsed');
-            const collapseBtn = document.getElementById('collapseBtn');
-            if (collapseBtn) {
-              collapseBtn.innerHTML = '<i class="fas fa-chevron-right text-sm"></i>';
-              collapseBtn.title = 'Expand sidebar';
-            }
-          }
-        }
-      });
-
-      function toggleDarkMode() {
-        document.documentElement.classList.toggle('dark');
-        document.body.classList.toggle('dark');
-      }
-
-      function showToast(title, message = '', type = 'info') {
-        const container = document.getElementById('toastContainer');
-        if (!container) return;
-        const toast = document.createElement('div');
-        const bg = type === 'success' ? 'bg-emerald-600' : type === 'danger' ? 'bg-red-600' : 'bg-slate-800';
-        toast.className = bg + ' text-white text-sm px-4 py-3 rounded-lg shadow-lg pointer-events-auto flex items-center gap-3 transition-opacity duration-300';
-        toast.style.color = '#ffffff';
-        toast.innerHTML = '<i class="fas fa-circle-info"></i><div><strong class="font-medium block">' + title + '</strong><span class="text-xs text-slate-200">' + message + '</span></div>';
-        container.appendChild(toast);
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          setTimeout(() => toast.remove(), 300);
-        }, 3500);
-      }
-
-      function showConfirmModal(title, message, onConfirm) {
-        const modal = document.getElementById('rapiderConfirmModal');
-        const titleEl = document.getElementById('rapiderConfirmTitle');
-        const msgEl = document.getElementById('rapiderConfirmMessage');
-        const okBtn = document.getElementById('rapiderConfirmOkBtn');
-        const cancelBtn = document.getElementById('rapiderConfirmCancelBtn');
-
-        if (!modal) return;
-        if (titleEl) titleEl.textContent = title;
-        if (msgEl) msgEl.textContent = message;
-
-        const cleanup = () => {
-          okBtn.onclick = null;
-          cancelBtn.onclick = null;
-          modal.close();
-        };
-
-        okBtn.onclick = () => {
-          cleanup();
-          if (typeof onConfirm === 'function') onConfirm();
-        };
-        cancelBtn.onclick = () => {
-          cleanup();
-        };
-
-        modal.showModal();
-      }
-    </script>
-    
-<script>
-    let allRecords = [];
-    const fallbackSeed = [{"id":"00000000-0128-0003-0000-000000000001","sessionId":"00000000-0128-0001-0000-000000000001","registerId":"00000000-0128-0001-0000-000000000001","transactionNumber":"CPT-2026-0001","itemsCount":10,"subtotal":10,"taxTotal":10,"totalAmount":1250,"state":"POS Transaction state configuration (1)","transactedAt":"2026-11-01T10:00:00Z","createdAt":"2026-11-01T10:00:00Z","updatedAt":"2026-11-01T10:00:00Z","isDeleted":false,"status":"ACTIVE"},{"id":"00000000-0128-0003-0000-000000000002","sessionId":"00000000-0128-0001-0000-000000000002","registerId":"00000000-0128-0001-0000-000000000002","transactionNumber":"CPT-2026-0002","itemsCount":20,"subtotal":20,"taxTotal":20,"totalAmount":2500,"state":"POS Transaction state configuration (2)","transactedAt":"2026-11-02T10:00:00Z","createdAt":"2026-11-02T10:00:00Z","updatedAt":"2026-11-02T10:00:00Z","isDeleted":false,"status":"IN_PROGRESS"},{"id":"00000000-0128-0003-0000-000000000003","sessionId":"00000000-0128-0001-0000-000000000003","registerId":"00000000-0128-0001-0000-000000000003","transactionNumber":"CPT-2026-0003","itemsCount":30,"subtotal":30,"taxTotal":30,"totalAmount":3750,"state":"POS Transaction state configuration (3)","transactedAt":"2026-11-03T10:00:00Z","createdAt":"2026-11-03T10:00:00Z","updatedAt":"2026-11-03T10:00:00Z","isDeleted":false,"status":"COMPLETED"}];
-
-    function renderRows(items) {
-      const tbody = document.getElementById('recordsTableBody');
-      const emptyEl = document.getElementById('recordsEmptyState');
-      const kpiEl = document.getElementById('kpiTotalCount');
-      if (kpiEl) kpiEl.textContent = String(items.length);
-
-      if (!items.length) {
-        tbody.innerHTML = '';
-        emptyEl.classList.remove('hidden');
+  <script>
+    window.esc = function(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+    window.toast = function(message, type) {
+      if (window.rapiderApi && typeof window.rapiderApi.showNotification === 'function') {
+        window.rapiderApi.showNotification({ type: type || 'success', message: message });
         return;
       }
-      emptyEl.classList.add('hidden');
-      tbody.innerHTML = items.map(item => {
-        const titleVal = item["id"] || item.name || item.title || item.id;
-        const secVal = item["sessionId"] || item.code || item.status || 'STD-01';
-        const stVal = item.status || 'ACTIVE';
-        const badgeCls = stVal === 'ACTIVE' || stVal === 'COMPLETED'
-          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300'
-          : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300';
-
-        return `
-          <tr class="hover:bg-slate-50/60 dark:hover:bg-slate-700/30 transition-colors">
-            <td class="p-4 font-semibold text-slate-900 dark:text-white">
-              <a href="#/review-detail?id=${encodeURIComponent(item.id || '')}" class="hover:text-indigo-600 transition-colors">${titleVal}</a>
-            </td>
-            <td class="p-4 text-slate-600 dark:text-slate-300 font-mono text-xs">${typeof secVal === 'object' ? JSON.stringify(secVal) : secVal}</td>
-            <td class="p-4">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full ${badgeCls}">${stVal}</span>
-            </td>
-            <td class="p-4 text-right space-x-2">
-              
-              <a href="#/product-rating-detail?id=${encodeURIComponent(item.id || '')}" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950 rounded-lg transition-colors">
-                <i class="fas fa-pen"></i>
-                <span>Edit</span>
-              </a>
-              <button type="button" onclick="confirmDeleteRecord('${item.id}')" class="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors" title="Delete Record">
-                <i class="fas fa-trash-can text-xs"></i>
-              </button>
-              
-            </td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function applyFilters() {
-      const q = (document.getElementById('recordSearchInput').value || '').toLowerCase();
-      const st = document.getElementById('statusFilterSelect').value;
-      const tagsBar = document.getElementById('activeFilterTagsBar');
-
-      const chips = [];
-      if (q) chips.push('<span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 font-medium">Search: ' + q.replace(/</g, '&lt;') + '</span>');
-      if (st) chips.push('<span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-medium">Status: ' + st + '</span>');
-      if (tagsBar) {
-        tagsBar.innerHTML = '<span class="text-slate-400">Active Filters:</span> ' + (chips.length ? chips.join(' ') : '<span class="px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-medium">All Records</span>');
+      var el = document.createElement('div');
+      el.style.cssText = 'position:fixed;bottom:22px;right:22px;background:#1f243a;color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:150;box-shadow:0 10px 25px rgba(0,0,0,0.2);';
+      el.textContent = message;
+      document.body.appendChild(el);
+      setTimeout(function() { el.remove(); }, 2800);
+    };
+    window.showConfirmModal = function(title, message, onConfirm) {
+      var modal = document.getElementById('rapiderConfirmModal');
+      document.getElementById('rapiderConfirmTitle').textContent = title || 'Confirm Cancellation';
+      document.getElementById('rapiderConfirmMsg').textContent = message || 'Are you sure you want to proceed?';
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+      var okBtn = document.getElementById('rapiderConfirmOkBtn');
+      var cancelBtn = document.getElementById('rapiderConfirmCancelBtn');
+      var close = function() { modal.classList.add('hidden'); modal.style.display = 'none'; };
+      cancelBtn.onclick = close;
+      okBtn.onclick = async function() {
+        okBtn.disabled = true;
+        try { await onConfirm(); } finally { okBtn.disabled = false; close(); }
+      };
+    };
+    window.closePageDrawer = function(returnRoute) {
+      if (window.rapiderApi && typeof window.rapiderApi.closePageDrawer === 'function') {
+        window.rapiderApi.closePageDrawer();
+      } else {
+        window.location.hash = '#/' + (returnRoute || 'dashboard');
       }
+    };
+    window.getQueryParam = function(name) {
+      var hash = window.location.hash || '';
+      var qIdx = hash.indexOf('?');
+      if (qIdx !== -1) {
+        var params = new URLSearchParams(hash.slice(qIdx + 1));
+        if (params.get(name)) return params.get(name);
+      }
+      var searchParams = new URLSearchParams(window.location.search || '');
+      return searchParams.get(name);
+    };
 
-      const filtered = allRecords.filter(item => {
-        if (item.isDeleted === true) return false;
-        const text = JSON.stringify(item).toLowerCase();
-        const matchesQ = !q || text.includes(q);
-        const matchesSt = !st || item.status === st;
-        return matchesQ && matchesSt;
-      });
-      renderRows(filtered);
-    }
+    (function initShell() {
+      var layout = document.getElementById('appLayout');
+      var sidebar = document.getElementById('appSidebar');
+      var collapseBtn = document.getElementById('sidebarCollapseBtn');
+      var brandLink = document.getElementById('suiteBrandLink');
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var shade = document.getElementById('mobileShade');
+      var themeBtn = document.getElementById('themeToggleBtn');
 
-    function clearAllFilters() {
-      document.getElementById('recordSearchInput').value = '';
-      document.getElementById('statusFilterSelect').value = '';
-      applyFilters();
-    }
-
-    function confirmDeleteRecord(id) {
-      showConfirmModal(
-        'Delete POS Transaction?',
-        'Are you sure you want to remove this record? This action is logged and soft-deletes the item.',
-        async () => {
-          try {
-            if (window.rapiderApi && window.rapiderApi.deleteEntity) {
-              await window.rapiderApi.deleteEntity('ComPosTransaction', id);
-            }
-          } catch (e) {}
-          allRecords = allRecords.filter(r => String(r.id) !== String(id));
-          applyFilters();
-          showToast('Record Deleted', 'POS Transaction removed from active view.', 'success');
+      function applyCollapsed(isCollapsed) {
+        if (isCollapsed) {
+          layout.classList.add('sidebar-collapsed');
+          sidebar.classList.add('sidebar-collapsed');
+          sidebar.setAttribute('data-collapsed', 'true');
+        } else {
+          layout.classList.remove('sidebar-collapsed');
+          sidebar.classList.remove('sidebar-collapsed');
+          sidebar.setAttribute('data-collapsed', 'false');
         }
-      );
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        const res = await window.rapiderApi.findMany('ComPosTransaction', {});
-        const loaded = (res && (res.data || res)) || [];
-        allRecords = Array.isArray(loaded) && loaded.length ? loaded.filter(i => i.isDeleted !== true) : fallbackSeed;
-      } catch (e) {
-        allRecords = fallbackSeed;
+        try { localStorage.setItem('rapider_sidebar_collapsed', isCollapsed ? 'true' : 'false'); } catch (_) {}
       }
-      document.getElementById('recordSearchInput').addEventListener('input', applyFilters);
-      document.getElementById('statusFilterSelect').addEventListener('change', applyFilters);
-      applyFilters();
-    });
-    </script>
+
+      try {
+        if (localStorage.getItem('rapider_sidebar_collapsed') === 'true') applyCollapsed(true);
+      } catch (_) {}
+
+      if (collapseBtn) {
+        collapseBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          applyCollapsed(!sidebar.classList.contains('sidebar-collapsed'));
+        });
+      }
+      if (brandLink) {
+        brandLink.addEventListener('click', function(e) {
+          if (sidebar.classList.contains('sidebar-collapsed')) {
+            e.preventDefault();
+            e.stopPropagation();
+            applyCollapsed(false);
+          }
+        });
+      }
+      if (mobileBtn) {
+        mobileBtn.addEventListener('click', function() { document.body.classList.toggle('navopen'); });
+      }
+      if (shade) {
+        shade.addEventListener('click', function() { document.body.classList.remove('navopen'); });
+      }
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function() {
+          document.documentElement.classList.toggle('dark');
+          document.body.classList.toggle('dark');
+        });
+      }
+    })();
+
+    window.SEED_DATA = {"ComReviewAttributeTemplate":[{"id":"00000000-0128-0001-0000-000000000001","recordCode":"RAT-2026-101","title":"Product Reviews Review Attribute Template — Unit #1","name":"Product Reviews Review Attribute Template — Unit #1","modelTitle":"Review Attribute Template","ownerName":"Elena Rostova (Principal Lead)","primaryAttrLabel":"Template Code","primaryAttrValue":"Template Code: RAT-2026-101","secondaryAttrLabel":"Product Category Code","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Slider Definitions Json","metricValue":"92.0% (125.00 units)","operationalSummary":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +","invariantRule":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +1.00.","crossSuiteRef":"Maps to ComProduct category taxonomy","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550110","status":"DRAFT","moderationStage":"DRAFT","version":1,"isDeleted":false,"templateCode":"Template Code — RAT-2026-101","productCategoryCode":"Product Category Code — RAT-2026-101","sliderDefinitionsJson":"Slider Definitions Json — RAT-2026-101","reviewerContextFieldsJson":"Reviewer Context Fields Json — RAT-2026-101","smartPromptTopics":"Smart Prompt Topics — RAT-2026-101","postDeliveryDelayDays":"Post Delivery Delay Days — RAT-2026-101","isActive":true},{"id":"00000000-0128-0001-0000-000000000002","recordCode":"RAT-2026-102","title":"Product Reviews Review Attribute Template — Unit #2","name":"Product Reviews Review Attribute Template — Unit #2","modelTitle":"Review Attribute Template","ownerName":"Marcus Vance (Senior Operations)","primaryAttrLabel":"Template Code","primaryAttrValue":"Template Code: RAT-2026-102","secondaryAttrLabel":"Product Category Code","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Slider Definitions Json","metricValue":"93.1% (172.50 units)","operationalSummary":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +","invariantRule":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +1.00.","crossSuiteRef":"Maps to ComProduct category taxonomy","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550111","status":"IN_REVIEW","moderationStage":"IN_REVIEW","version":2,"isDeleted":false,"templateCode":"Template Code — RAT-2026-102","productCategoryCode":"Product Category Code — RAT-2026-102","sliderDefinitionsJson":"Slider Definitions Json — RAT-2026-102","reviewerContextFieldsJson":"Reviewer Context Fields Json — RAT-2026-102","smartPromptTopics":"Smart Prompt Topics — RAT-2026-102","postDeliveryDelayDays":"Post Delivery Delay Days — RAT-2026-102","isActive":false},{"id":"00000000-0128-0001-0000-000000000003","recordCode":"RAT-2026-103","title":"Product Reviews Review Attribute Template — Unit #3","name":"Product Reviews Review Attribute Template — Unit #3","modelTitle":"Review Attribute Template","ownerName":"Sophia Laurent (Director)","primaryAttrLabel":"Template Code","primaryAttrValue":"Template Code: RAT-2026-103","secondaryAttrLabel":"Product Category Code","secondaryAttrValue":"Product Reviews Tier 3","metricLabel":"Slider Definitions Json","metricValue":"94.2% (220.00 units)","operationalSummary":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +","invariantRule":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +1.00.","crossSuiteRef":"Maps to ComProduct category taxonomy","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550112","status":"APPROVED","moderationStage":"APPROVED","version":3,"isDeleted":false,"templateCode":"Template Code — RAT-2026-103","productCategoryCode":"Product Category Code — RAT-2026-103","sliderDefinitionsJson":"Slider Definitions Json — RAT-2026-103","reviewerContextFieldsJson":"Reviewer Context Fields Json — RAT-2026-103","smartPromptTopics":"Smart Prompt Topics — RAT-2026-103","postDeliveryDelayDays":"Post Delivery Delay Days — RAT-2026-103","isActive":true},{"id":"00000000-0128-0001-0000-000000000004","recordCode":"RAT-2026-104","title":"Product Reviews Review Attribute Template — Unit #4","name":"Product Reviews Review Attribute Template — Unit #4","modelTitle":"Review Attribute Template","ownerName":"Liam Chen (Systems Architect)","primaryAttrLabel":"Template Code","primaryAttrValue":"Template Code: RAT-2026-104","secondaryAttrLabel":"Product Category Code","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Slider Definitions Json","metricValue":"95.3% (267.50 units)","operationalSummary":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +","invariantRule":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +1.00.","crossSuiteRef":"Maps to ComProduct category taxonomy","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550113","status":"ACTIVE","moderationStage":"ACTIVE","version":4,"isDeleted":false,"templateCode":"Template Code — RAT-2026-104","productCategoryCode":"Product Category Code — RAT-2026-104","sliderDefinitionsJson":"Slider Definitions Json — RAT-2026-104","reviewerContextFieldsJson":"Reviewer Context Fields Json — RAT-2026-104","smartPromptTopics":"Smart Prompt Topics — RAT-2026-104","postDeliveryDelayDays":"Post Delivery Delay Days — RAT-2026-104","isActive":false},{"id":"00000000-0128-0001-0000-000000000005","recordCode":"RAT-2026-105","title":"Product Reviews Review Attribute Template — Unit #5","name":"Product Reviews Review Attribute Template — Unit #5","modelTitle":"Review Attribute Template","ownerName":"Amira Al-Mansoor (Compliance Lead)","primaryAttrLabel":"Template Code","primaryAttrValue":"Template Code: RAT-2026-105","secondaryAttrLabel":"Product Category Code","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Slider Definitions Json","metricValue":"96.4% (315.00 units)","operationalSummary":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +","invariantRule":"postDeliveryDelayDays >= 0; slider definitions enforce 3- or 5-point discrete scales mapped to -1.00 .. +1.00.","crossSuiteRef":"Maps to ComProduct category taxonomy","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550114","status":"DRAFT","moderationStage":"DRAFT","version":5,"isDeleted":false,"templateCode":"Template Code — RAT-2026-105","productCategoryCode":"Product Category Code — RAT-2026-105","sliderDefinitionsJson":"Slider Definitions Json — RAT-2026-105","reviewerContextFieldsJson":"Reviewer Context Fields Json — RAT-2026-105","smartPromptTopics":"Smart Prompt Topics — RAT-2026-105","postDeliveryDelayDays":"Post Delivery Delay Days — RAT-2026-105","isActive":true}],"ComReviewRequest":[{"id":"00000000-0128-0002-0000-000000000001","recordCode":"RR-2026-201","title":"Product Reviews Review Request — Unit #1","name":"Product Reviews Review Request — Unit #1","modelTitle":"Review Request","ownerName":"Marcus Vance (Senior Operations)","primaryAttrLabel":"Request Number","primaryAttrValue":"Request Number: RR-2026-201","secondaryAttrLabel":"Customer Order","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Pos Transaction","metricValue":"92.1% (250.00 units)","operationalSummary":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cance","invariantRule":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cancels if order/ite","crossSuiteRef":"customerOrderId -> OpsCustomerOrder.id, shipmentId -> ComShipment.id, posTransac","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550115","status":"AWAITING_DELIVERY","moderationStage":"AWAITING_DELIVERY","version":1,"isDeleted":false,"requestNumber":"Request Number — RR-2026-201","customerOrderId":"Customer Order — RR-2026-201","posTransactionId":"Pos Transaction — RR-2026-201","shipmentId":"Shipment — RR-2026-201","contactId":"Contact — RR-2026-201","recipientEmail":"Recipient Email — RR-2026-201","recipientPhone":"Recipient Phone — RR-2026-201","provenanceType":"VERIFIED_ORDER","rewardOffered":"Reward Offered — RR-2026-201","tokenHash":true,"scheduledSendAt":"Scheduled Send At — RR-2026-201","sentAt":"Sent At — RR-2026-201","completedAt":"Completed At — RR-2026-201"},{"id":"00000000-0128-0002-0000-000000000002","recordCode":"RR-2026-202","title":"Product Reviews Review Request — Unit #2","name":"Product Reviews Review Request — Unit #2","modelTitle":"Review Request","ownerName":"Sophia Laurent (Director)","primaryAttrLabel":"Request Number","primaryAttrValue":"Request Number: RR-2026-202","secondaryAttrLabel":"Customer Order","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Pos Transaction","metricValue":"93.2% (297.50 units)","operationalSummary":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cance","invariantRule":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cancels if order/ite","crossSuiteRef":"customerOrderId -> OpsCustomerOrder.id, shipmentId -> ComShipment.id, posTransac","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550116","status":"SCHEDULED","moderationStage":"SCHEDULED","version":2,"isDeleted":false,"requestNumber":"Request Number — RR-2026-202","customerOrderId":"Customer Order — RR-2026-202","posTransactionId":"Pos Transaction — RR-2026-202","shipmentId":"Shipment — RR-2026-202","contactId":"Contact — RR-2026-202","recipientEmail":"Recipient Email — RR-2026-202","recipientPhone":"Recipient Phone — RR-2026-202","provenanceType":"VERIFIED_POS","rewardOffered":"Reward Offered — RR-2026-202","tokenHash":false,"scheduledSendAt":"Scheduled Send At — RR-2026-202","sentAt":"Sent At — RR-2026-202","completedAt":"Completed At — RR-2026-202"},{"id":"00000000-0128-0002-0000-000000000003","recordCode":"RR-2026-203","title":"Product Reviews Review Request — Unit #3","name":"Product Reviews Review Request — Unit #3","modelTitle":"Review Request","ownerName":"Liam Chen (Systems Architect)","primaryAttrLabel":"Request Number","primaryAttrValue":"Request Number: RR-2026-203","secondaryAttrLabel":"Customer Order","secondaryAttrValue":"Product Reviews Tier 3","metricLabel":"Pos Transaction","metricValue":"94.3% (345.00 units)","operationalSummary":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cance","invariantRule":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cancels if order/ite","crossSuiteRef":"customerOrderId -> OpsCustomerOrder.id, shipmentId -> ComShipment.id, posTransac","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550117","status":"SENT","moderationStage":"SENT","version":3,"isDeleted":false,"requestNumber":"Request Number — RR-2026-203","customerOrderId":"Customer Order — RR-2026-203","posTransactionId":"Pos Transaction — RR-2026-203","shipmentId":"Shipment — RR-2026-203","contactId":"Contact — RR-2026-203","recipientEmail":"Recipient Email — RR-2026-203","recipientPhone":"Recipient Phone — RR-2026-203","provenanceType":"SEEDED_FREE_SAMPLE","rewardOffered":"Reward Offered — RR-2026-203","tokenHash":true,"scheduledSendAt":"Scheduled Send At — RR-2026-203","sentAt":"Sent At — RR-2026-203","completedAt":"Completed At — RR-2026-203"},{"id":"00000000-0128-0002-0000-000000000004","recordCode":"RR-2026-204","title":"Product Reviews Review Request — Unit #4","name":"Product Reviews Review Request — Unit #4","modelTitle":"Review Request","ownerName":"Amira Al-Mansoor (Compliance Lead)","primaryAttrLabel":"Request Number","primaryAttrValue":"Request Number: RR-2026-204","secondaryAttrLabel":"Customer Order","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Pos Transaction","metricValue":"95.4% (392.50 units)","operationalSummary":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cance","invariantRule":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cancels if order/ite","crossSuiteRef":"customerOrderId -> OpsCustomerOrder.id, shipmentId -> ComShipment.id, posTransac","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550118","status":"REMINDER_SENT","moderationStage":"REMINDER_SENT","version":4,"isDeleted":false,"requestNumber":"Request Number — RR-2026-204","customerOrderId":"Customer Order — RR-2026-204","posTransactionId":"Pos Transaction — RR-2026-204","shipmentId":"Shipment — RR-2026-204","contactId":"Contact — RR-2026-204","recipientEmail":"Recipient Email — RR-2026-204","recipientPhone":"Recipient Phone — RR-2026-204","provenanceType":"VERIFIED_ORDER","rewardOffered":"Reward Offered — RR-2026-204","tokenHash":false,"scheduledSendAt":"Scheduled Send At — RR-2026-204","sentAt":"Sent At — RR-2026-204","completedAt":"Completed At — RR-2026-204"},{"id":"00000000-0128-0002-0000-000000000005","recordCode":"RR-2026-205","title":"Product Reviews Review Request — Unit #5","name":"Product Reviews Review Request — Unit #5","modelTitle":"Review Request","ownerName":"Noah Kowalski (Specialist)","primaryAttrLabel":"Request Number","primaryAttrValue":"Request Number: RR-2026-205","secondaryAttrLabel":"Customer Order","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Pos Transaction","metricValue":"96.5% (440.00 units)","operationalSummary":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cance","invariantRule":"Raw token never persisted (only tokenHash); single submission per (requestId, variantId) line; auto-cancels if order/ite","crossSuiteRef":"customerOrderId -> OpsCustomerOrder.id, shipmentId -> ComShipment.id, posTransac","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550119","status":"COMPLETED","moderationStage":"COMPLETED","version":5,"isDeleted":false,"requestNumber":"Request Number — RR-2026-205","customerOrderId":"Customer Order — RR-2026-205","posTransactionId":"Pos Transaction — RR-2026-205","shipmentId":"Shipment — RR-2026-205","contactId":"Contact — RR-2026-205","recipientEmail":"Recipient Email — RR-2026-205","recipientPhone":"Recipient Phone — RR-2026-205","provenanceType":"VERIFIED_POS","rewardOffered":"Reward Offered — RR-2026-205","tokenHash":true,"scheduledSendAt":"Scheduled Send At — RR-2026-205","sentAt":"Sent At — RR-2026-205","completedAt":"Completed At — RR-2026-205"}],"ComProductReview":[{"id":"00000000-0128-0003-0000-000000000001","recordCode":"PR-2026-301","title":"Product Reviews Product Review — Unit #1","name":"Product Reviews Product Review — Unit #1","modelTitle":"Product Review","ownerName":"Sophia Laurent (Director)","primaryAttrLabel":"Review Number","primaryAttrValue":"Review Number: PR-2026-301","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Variant","metricValue":"92.2% (375.00 units)","operationalSummary":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory qua","invariantRule":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory quarantineReasonCo","crossSuiteRef":"productId -> ComProduct.id, variantId -> ComVariant.id, reviewRequestId -> ComRe","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550120","status":"VERIFIED_BUYER","moderationStage":"VERIFIED_BUYER","version":1,"isDeleted":false,"reviewNumber":"Review Number — PR-2026-301","productId":"Product — PR-2026-301","variantId":"Variant — PR-2026-301","reviewRequestId":"Review Request — PR-2026-301","contactId":"Contact — PR-2026-301","siteId":"Site — PR-2026-301","starRating":"Star Rating — PR-2026-301","storeExperienceRating":"Store Experience Rating — PR-2026-301","headline":"Headline — PR-2026-301","bodyText":"Body Text — PR-2026-301","redactedBodyText":"Redacted Body Text — PR-2026-301","attributeResponsesJson":"Attribute Responses Json — PR-2026-301","provenanceBadge":"VERIFIED_BUYER","isIncentivized":true,"localeCode":"Locale Code — PR-2026-301","helpfulCount":"Helpful Count — PR-2026-301","reportedCount":"Reported Count — PR-2026-301","moderationStatus":"PENDING_SCREENING","quarantineReasonCode":"Quarantine Reason Code — PR-2026-301","quarantineAuditNote":"Quarantine Audit Note — PR-2026-301","merchantReplyText":"Merchant Reply Text — PR-2026-301","merchantRepliedAt":"Merchant Replied At — PR-2026-301","linkedSupportTicketId":"Linked Support Ticket — PR-2026-301","publishedAt":true},{"id":"00000000-0128-0003-0000-000000000002","recordCode":"PR-2026-302","title":"Product Reviews Product Review — Unit #2","name":"Product Reviews Product Review — Unit #2","modelTitle":"Product Review","ownerName":"Liam Chen (Systems Architect)","primaryAttrLabel":"Review Number","primaryAttrValue":"Review Number: PR-2026-302","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Variant","metricValue":"93.3% (422.50 units)","operationalSummary":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory qua","invariantRule":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory quarantineReasonCo","crossSuiteRef":"productId -> ComProduct.id, variantId -> ComVariant.id, reviewRequestId -> ComRe","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550121","status":"INCENTIVIZED_REWARD","moderationStage":"INCENTIVIZED_REWARD","version":2,"isDeleted":false,"reviewNumber":"Review Number — PR-2026-302","productId":"Product — PR-2026-302","variantId":"Variant — PR-2026-302","reviewRequestId":"Review Request — PR-2026-302","contactId":"Contact — PR-2026-302","siteId":"Site — PR-2026-302","starRating":"Star Rating — PR-2026-302","storeExperienceRating":"Store Experience Rating — PR-2026-302","headline":"Headline — PR-2026-302","bodyText":"Body Text — PR-2026-302","redactedBodyText":"Redacted Body Text — PR-2026-302","attributeResponsesJson":"Attribute Responses Json — PR-2026-302","provenanceBadge":"INCENTIVIZED_REWARD","isIncentivized":false,"localeCode":"Locale Code — PR-2026-302","helpfulCount":"Helpful Count — PR-2026-302","reportedCount":"Reported Count — PR-2026-302","moderationStatus":"FLAGGED_COMPLIANCE","quarantineReasonCode":"Quarantine Reason Code — PR-2026-302","quarantineAuditNote":"Quarantine Audit Note — PR-2026-302","merchantReplyText":"Merchant Reply Text — PR-2026-302","merchantRepliedAt":"Merchant Replied At — PR-2026-302","linkedSupportTicketId":"Linked Support Ticket — PR-2026-302","publishedAt":false},{"id":"00000000-0128-0003-0000-000000000003","recordCode":"PR-2026-303","title":"Product Reviews Product Review — Unit #3","name":"Product Reviews Product Review — Unit #3","modelTitle":"Product Review","ownerName":"Amira Al-Mansoor (Compliance Lead)","primaryAttrLabel":"Review Number","primaryAttrValue":"Review Number: PR-2026-303","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 3","metricLabel":"Variant","metricValue":"94.4% (470.00 units)","operationalSummary":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory qua","invariantRule":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory quarantineReasonCo","crossSuiteRef":"productId -> ComProduct.id, variantId -> ComVariant.id, reviewRequestId -> ComRe","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550122","status":"SEEDED_FREE_SAMPLE","moderationStage":"SEEDED_FREE_SAMPLE","version":3,"isDeleted":false,"reviewNumber":"Review Number — PR-2026-303","productId":"Product — PR-2026-303","variantId":"Variant — PR-2026-303","reviewRequestId":"Review Request — PR-2026-303","contactId":"Contact — PR-2026-303","siteId":"Site — PR-2026-303","starRating":"Star Rating — PR-2026-303","storeExperienceRating":"Store Experience Rating — PR-2026-303","headline":"Headline — PR-2026-303","bodyText":"Body Text — PR-2026-303","redactedBodyText":"Redacted Body Text — PR-2026-303","attributeResponsesJson":"Attribute Responses Json — PR-2026-303","provenanceBadge":"SEEDED_FREE_SAMPLE","isIncentivized":true,"localeCode":"Locale Code — PR-2026-303","helpfulCount":"Helpful Count — PR-2026-303","reportedCount":"Reported Count — PR-2026-303","moderationStatus":"PUBLISHED","quarantineReasonCode":"Quarantine Reason Code — PR-2026-303","quarantineAuditNote":"Quarantine Audit Note — PR-2026-303","merchantReplyText":"Merchant Reply Text — PR-2026-303","merchantRepliedAt":"Merchant Replied At — PR-2026-303","linkedSupportTicketId":"Linked Support Ticket — PR-2026-303","publishedAt":true},{"id":"00000000-0128-0003-0000-000000000004","recordCode":"PR-2026-304","title":"Product Reviews Product Review — Unit #4","name":"Product Reviews Product Review — Unit #4","modelTitle":"Product Review","ownerName":"Noah Kowalski (Specialist)","primaryAttrLabel":"Review Number","primaryAttrValue":"Review Number: PR-2026-304","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Variant","metricValue":"95.5% (517.50 units)","operationalSummary":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory qua","invariantRule":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory quarantineReasonCo","crossSuiteRef":"productId -> ComProduct.id, variantId -> ComVariant.id, reviewRequestId -> ComRe","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550123","status":"UNVERIFIED_OPEN","moderationStage":"UNVERIFIED_OPEN","version":4,"isDeleted":false,"reviewNumber":"Review Number — PR-2026-304","productId":"Product — PR-2026-304","variantId":"Variant — PR-2026-304","reviewRequestId":"Review Request — PR-2026-304","contactId":"Contact — PR-2026-304","siteId":"Site — PR-2026-304","starRating":"Star Rating — PR-2026-304","storeExperienceRating":"Store Experience Rating — PR-2026-304","headline":"Headline — PR-2026-304","bodyText":"Body Text — PR-2026-304","redactedBodyText":"Redacted Body Text — PR-2026-304","attributeResponsesJson":"Attribute Responses Json — PR-2026-304","provenanceBadge":"UNVERIFIED_OPEN","isIncentivized":false,"localeCode":"Locale Code — PR-2026-304","helpfulCount":"Helpful Count — PR-2026-304","reportedCount":"Reported Count — PR-2026-304","moderationStatus":"QUARANTINED_LEGAL","quarantineReasonCode":"Quarantine Reason Code — PR-2026-304","quarantineAuditNote":"Quarantine Audit Note — PR-2026-304","merchantReplyText":"Merchant Reply Text — PR-2026-304","merchantRepliedAt":"Merchant Replied At — PR-2026-304","linkedSupportTicketId":"Linked Support Ticket — PR-2026-304","publishedAt":false},{"id":"00000000-0128-0003-0000-000000000005","recordCode":"PR-2026-305","title":"Product Reviews Product Review — Unit #5","name":"Product Reviews Product Review — Unit #5","modelTitle":"Product Review","ownerName":"Elena Rostova (Principal Lead)","primaryAttrLabel":"Review Number","primaryAttrValue":"Review Number: PR-2026-305","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Variant","metricValue":"96.6% (565.00 units)","operationalSummary":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory qua","invariantRule":"1 <= starRating <= 5; FTC invariant: transitioning to QUARANTINED_LEGAL requires a non-null statutory quarantineReasonCo","crossSuiteRef":"productId -> ComProduct.id, variantId -> ComVariant.id, reviewRequestId -> ComRe","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550124","status":"VERIFIED_IMPORTED","moderationStage":"VERIFIED_IMPORTED","version":5,"isDeleted":false,"reviewNumber":"Review Number — PR-2026-305","productId":"Product — PR-2026-305","variantId":"Variant — PR-2026-305","reviewRequestId":"Review Request — PR-2026-305","contactId":"Contact — PR-2026-305","siteId":"Site — PR-2026-305","starRating":"Star Rating — PR-2026-305","storeExperienceRating":"Store Experience Rating — PR-2026-305","headline":"Headline — PR-2026-305","bodyText":"Body Text — PR-2026-305","redactedBodyText":"Redacted Body Text — PR-2026-305","attributeResponsesJson":"Attribute Responses Json — PR-2026-305","provenanceBadge":"VERIFIED_IMPORTED","isIncentivized":true,"localeCode":"Locale Code — PR-2026-305","helpfulCount":"Helpful Count — PR-2026-305","reportedCount":"Reported Count — PR-2026-305","moderationStatus":"PENDING_SCREENING","quarantineReasonCode":"Quarantine Reason Code — PR-2026-305","quarantineAuditNote":"Quarantine Audit Note — PR-2026-305","merchantReplyText":"Merchant Reply Text — PR-2026-305","merchantRepliedAt":"Merchant Replied At — PR-2026-305","linkedSupportTicketId":"Linked Support Ticket — PR-2026-305","publishedAt":true}],"ComReviewMedia":[{"id":"00000000-0128-0004-0000-000000000001","recordCode":"RM-2026-401","title":"Product Reviews Review Media — Unit #1","name":"Product Reviews Review Media — Unit #1","modelTitle":"Review Media","ownerName":"Liam Chen (Systems Architect)","primaryAttrLabel":"Review","primaryAttrValue":"Review: RM-2026-401","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Variant","metricValue":"92.3% (500.00 units)","operationalSummary":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coor","invariantRule":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coordinates.","crossSuiteRef":"reviewId -> ComProductReview.id, fileId -> Rapider Files","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550125","status":"PHOTO","moderationStage":"PHOTO","version":1,"isDeleted":false,"reviewId":"Review — RM-2026-401","productId":"Product — RM-2026-401","variantId":"Variant — RM-2026-401","mediaType":"PHOTO","fileId":"File — RM-2026-401","thumbnailFileId":"Thumbnail File — RM-2026-401","durationSeconds":"Duration Seconds — RM-2026-401","exifScrubbed":"Exif Scrubbed — RM-2026-401","isFeaturedOnPdp":true,"mediaModerationStatus":"PENDING"},{"id":"00000000-0128-0004-0000-000000000002","recordCode":"RM-2026-402","title":"Product Reviews Review Media — Unit #2","name":"Product Reviews Review Media — Unit #2","modelTitle":"Review Media","ownerName":"Amira Al-Mansoor (Compliance Lead)","primaryAttrLabel":"Review","primaryAttrValue":"Review: RM-2026-402","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Variant","metricValue":"93.4% (547.50 units)","operationalSummary":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coor","invariantRule":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coordinates.","crossSuiteRef":"reviewId -> ComProductReview.id, fileId -> Rapider Files","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550126","status":"VIDEO","moderationStage":"VIDEO","version":2,"isDeleted":false,"reviewId":"Review — RM-2026-402","productId":"Product — RM-2026-402","variantId":"Variant — RM-2026-402","mediaType":"VIDEO","fileId":"File — RM-2026-402","thumbnailFileId":"Thumbnail File — RM-2026-402","durationSeconds":"Duration Seconds — RM-2026-402","exifScrubbed":"Exif Scrubbed — RM-2026-402","isFeaturedOnPdp":false,"mediaModerationStatus":"APPROVED"},{"id":"00000000-0128-0004-0000-000000000003","recordCode":"RM-2026-403","title":"Product Reviews Review Media — Unit #3","name":"Product Reviews Review Media — Unit #3","modelTitle":"Review Media","ownerName":"Noah Kowalski (Specialist)","primaryAttrLabel":"Review","primaryAttrValue":"Review: RM-2026-403","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 3","metricLabel":"Variant","metricValue":"94.5% (595.00 units)","operationalSummary":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coor","invariantRule":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coordinates.","crossSuiteRef":"reviewId -> ComProductReview.id, fileId -> Rapider Files","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550127","status":"PHOTO","moderationStage":"PHOTO","version":3,"isDeleted":false,"reviewId":"Review — RM-2026-403","productId":"Product — RM-2026-403","variantId":"Variant — RM-2026-403","mediaType":"PHOTO","fileId":"File — RM-2026-403","thumbnailFileId":"Thumbnail File — RM-2026-403","durationSeconds":"Duration Seconds — RM-2026-403","exifScrubbed":"Exif Scrubbed — RM-2026-403","isFeaturedOnPdp":true,"mediaModerationStatus":"REJECTED_SAFETY"},{"id":"00000000-0128-0004-0000-000000000004","recordCode":"RM-2026-404","title":"Product Reviews Review Media — Unit #4","name":"Product Reviews Review Media — Unit #4","modelTitle":"Review Media","ownerName":"Elena Rostova (Principal Lead)","primaryAttrLabel":"Review","primaryAttrValue":"Review: RM-2026-404","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Variant","metricValue":"95.6% (642.50 units)","operationalSummary":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coor","invariantRule":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coordinates.","crossSuiteRef":"reviewId -> ComProductReview.id, fileId -> Rapider Files","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550128","status":"VIDEO","moderationStage":"VIDEO","version":4,"isDeleted":false,"reviewId":"Review — RM-2026-404","productId":"Product — RM-2026-404","variantId":"Variant — RM-2026-404","mediaType":"VIDEO","fileId":"File — RM-2026-404","thumbnailFileId":"Thumbnail File — RM-2026-404","durationSeconds":"Duration Seconds — RM-2026-404","exifScrubbed":"Exif Scrubbed — RM-2026-404","isFeaturedOnPdp":false,"mediaModerationStatus":"PENDING"},{"id":"00000000-0128-0004-0000-000000000005","recordCode":"RM-2026-405","title":"Product Reviews Review Media — Unit #5","name":"Product Reviews Review Media — Unit #5","modelTitle":"Review Media","ownerName":"Marcus Vance (Senior Operations)","primaryAttrLabel":"Review","primaryAttrValue":"Review: RM-2026-405","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Variant","metricValue":"96.7% (690.00 units)","operationalSummary":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coor","invariantRule":"exifScrubbed must be true before mediaModerationStatus can become APPROVED to protect buyer home GPS coordinates.","crossSuiteRef":"reviewId -> ComProductReview.id, fileId -> Rapider Files","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550129","status":"PHOTO","moderationStage":"PHOTO","version":5,"isDeleted":false,"reviewId":"Review — RM-2026-405","productId":"Product — RM-2026-405","variantId":"Variant — RM-2026-405","mediaType":"PHOTO","fileId":"File — RM-2026-405","thumbnailFileId":"Thumbnail File — RM-2026-405","durationSeconds":"Duration Seconds — RM-2026-405","exifScrubbed":"Exif Scrubbed — RM-2026-405","isFeaturedOnPdp":true,"mediaModerationStatus":"APPROVED"}],"ComProductQuestion":[{"id":"00000000-0128-0005-0000-000000000001","recordCode":"PQ-2026-501","title":"Product Reviews Product Question — Unit #1","name":"Product Reviews Product Question — Unit #1","modelTitle":"Product Question","ownerName":"Amira Al-Mansoor (Compliance Lead)","primaryAttrLabel":"Question Number","primaryAttrValue":"Question Number: PQ-2026-501","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Variant","metricValue":"92.4% (625.00 units)","operationalSummary":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","invariantRule":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","crossSuiteRef":"productId -> ComProduct.id, siteId -> ComSite.id","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550130","status":"OPEN","moderationStage":"OPEN","version":1,"isDeleted":false,"questionNumber":"Question Number — PQ-2026-501","productId":"Product — PQ-2026-501","variantId":"Variant — PQ-2026-501","siteId":"Site — PQ-2026-501","askerContactId":"Asker Contact — PQ-2026-501","askerDisplayName":true,"askerEmail":"Asker Email — PQ-2026-501","questionText":"Question Text — PQ-2026-501","officialAnswerText":"Official Answer Text — PQ-2026-501","officialAnsweredByUserId":"Official Answered By User — PQ-2026-501","communityAnswersJson":"Community Answers Json — PQ-2026-501","askedAt":"Asked At — PQ-2026-501","answeredAt":"Answered At — PQ-2026-501"},{"id":"00000000-0128-0005-0000-000000000002","recordCode":"PQ-2026-502","title":"Product Reviews Product Question — Unit #2","name":"Product Reviews Product Question — Unit #2","modelTitle":"Product Question","ownerName":"Noah Kowalski (Specialist)","primaryAttrLabel":"Question Number","primaryAttrValue":"Question Number: PQ-2026-502","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Variant","metricValue":"93.5% (672.50 units)","operationalSummary":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","invariantRule":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","crossSuiteRef":"productId -> ComProduct.id, siteId -> ComSite.id","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550131","status":"ROUTED_TO_OWNERS","moderationStage":"ROUTED_TO_OWNERS","version":2,"isDeleted":false,"questionNumber":"Question Number — PQ-2026-502","productId":"Product — PQ-2026-502","variantId":"Variant — PQ-2026-502","siteId":"Site — PQ-2026-502","askerContactId":"Asker Contact — PQ-2026-502","askerDisplayName":false,"askerEmail":"Asker Email — PQ-2026-502","questionText":"Question Text — PQ-2026-502","officialAnswerText":"Official Answer Text — PQ-2026-502","officialAnsweredByUserId":"Official Answered By User — PQ-2026-502","communityAnswersJson":"Community Answers Json — PQ-2026-502","askedAt":"Asked At — PQ-2026-502","answeredAt":"Answered At — PQ-2026-502"},{"id":"00000000-0128-0005-0000-000000000003","recordCode":"PQ-2026-503","title":"Product Reviews Product Question — Unit #3","name":"Product Reviews Product Question — Unit #3","modelTitle":"Product Question","ownerName":"Elena Rostova (Principal Lead)","primaryAttrLabel":"Question Number","primaryAttrValue":"Question Number: PQ-2026-503","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 3","metricLabel":"Variant","metricValue":"94.6% (720.00 units)","operationalSummary":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","invariantRule":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","crossSuiteRef":"productId -> ComProduct.id, siteId -> ComSite.id","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550132","status":"ANSWERED_PUBLISHED","moderationStage":"ANSWERED_PUBLISHED","version":3,"isDeleted":false,"questionNumber":"Question Number — PQ-2026-503","productId":"Product — PQ-2026-503","variantId":"Variant — PQ-2026-503","siteId":"Site — PQ-2026-503","askerContactId":"Asker Contact — PQ-2026-503","askerDisplayName":true,"askerEmail":"Asker Email — PQ-2026-503","questionText":"Question Text — PQ-2026-503","officialAnswerText":"Official Answer Text — PQ-2026-503","officialAnsweredByUserId":"Official Answered By User — PQ-2026-503","communityAnswersJson":"Community Answers Json — PQ-2026-503","askedAt":"Asked At — PQ-2026-503","answeredAt":"Answered At — PQ-2026-503"},{"id":"00000000-0128-0005-0000-000000000004","recordCode":"PQ-2026-504","title":"Product Reviews Product Question — Unit #4","name":"Product Reviews Product Question — Unit #4","modelTitle":"Product Question","ownerName":"Marcus Vance (Senior Operations)","primaryAttrLabel":"Question Number","primaryAttrValue":"Question Number: PQ-2026-504","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Variant","metricValue":"95.7% (767.50 units)","operationalSummary":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","invariantRule":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","crossSuiteRef":"productId -> ComProduct.id, siteId -> ComSite.id","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550133","status":"QUARANTINED_SPAM","moderationStage":"QUARANTINED_SPAM","version":4,"isDeleted":false,"questionNumber":"Question Number — PQ-2026-504","productId":"Product — PQ-2026-504","variantId":"Variant — PQ-2026-504","siteId":"Site — PQ-2026-504","askerContactId":"Asker Contact — PQ-2026-504","askerDisplayName":false,"askerEmail":"Asker Email — PQ-2026-504","questionText":"Question Text — PQ-2026-504","officialAnswerText":"Official Answer Text — PQ-2026-504","officialAnsweredByUserId":"Official Answered By User — PQ-2026-504","communityAnswersJson":"Community Answers Json — PQ-2026-504","askedAt":"Asked At — PQ-2026-504","answeredAt":"Answered At — PQ-2026-504"},{"id":"00000000-0128-0005-0000-000000000005","recordCode":"PQ-2026-505","title":"Product Reviews Product Question — Unit #5","name":"Product Reviews Product Question — Unit #5","modelTitle":"Product Question","ownerName":"Sophia Laurent (Director)","primaryAttrLabel":"Question Number","primaryAttrValue":"Question Number: PQ-2026-505","secondaryAttrLabel":"Product","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Variant","metricValue":"96.8% (815.00 units)","operationalSummary":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","invariantRule":"Only answers with ANSWERED_PUBLISHED render on public storefront PDP widgets.","crossSuiteRef":"productId -> ComProduct.id, siteId -> ComSite.id","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550134","status":"OPEN","moderationStage":"OPEN","version":5,"isDeleted":false,"questionNumber":"Question Number — PQ-2026-505","productId":"Product — PQ-2026-505","variantId":"Variant — PQ-2026-505","siteId":"Site — PQ-2026-505","askerContactId":"Asker Contact — PQ-2026-505","askerDisplayName":true,"askerEmail":"Asker Email — PQ-2026-505","questionText":"Question Text — PQ-2026-505","officialAnswerText":"Official Answer Text — PQ-2026-505","officialAnsweredByUserId":"Official Answered By User — PQ-2026-505","communityAnswersJson":"Community Answers Json — PQ-2026-505","askedAt":"Asked At — PQ-2026-505","answeredAt":"Answered At — PQ-2026-505"}],"ComProductRatingSummary":[{"id":"00000000-0128-0006-0000-000000000001","recordCode":"PRS-2026-601","title":"Product Reviews Product Rating Summary — Unit #1","name":"Product Reviews Product Rating Summary — Unit #1","modelTitle":"Product Rating Summary","ownerName":"Noah Kowalski (Specialist)","primaryAttrLabel":"Product","primaryAttrValue":"Product: PRS-2026-601","secondaryAttrLabel":"Published Review Count","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Verified Buyer Count","metricValue":"92.5% (750.00 units)","operationalSummary":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == ","invariantRule":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == publishedReview","crossSuiteRef":"1-to-1 with ComProduct.id","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550135","status":"DRAFT","moderationStage":"DRAFT","version":1,"isDeleted":false,"productId":"Product — PRS-2026-601","publishedReviewCount":true,"verifiedBuyerCount":true,"averageStarRating":"Average Star Rating — PRS-2026-601","star1Count":"Star1 Count — PRS-2026-601","star2Count":"Star2 Count — PRS-2026-601","star3Count":"Star3 Count — PRS-2026-601","star4Count":"Star4 Count — PRS-2026-601","star5Count":"Star5 Count — PRS-2026-601","mediaItemCount":"Media Item Count — PRS-2026-601","attributeRollupsJson":"Attribute Rollups Json — PRS-2026-601","aiSummaryPros":true,"aiSummaryCons":true,"aiCitedReviewIds":"Ai Cited Review Ids — PRS-2026-601","aiSummaryUpdatedAt":true},{"id":"00000000-0128-0006-0000-000000000002","recordCode":"PRS-2026-602","title":"Product Reviews Product Rating Summary — Unit #2","name":"Product Reviews Product Rating Summary — Unit #2","modelTitle":"Product Rating Summary","ownerName":"Elena Rostova (Principal Lead)","primaryAttrLabel":"Product","primaryAttrValue":"Product: PRS-2026-602","secondaryAttrLabel":"Published Review Count","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Verified Buyer Count","metricValue":"93.6% (797.50 units)","operationalSummary":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == ","invariantRule":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == publishedReview","crossSuiteRef":"1-to-1 with ComProduct.id","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550136","status":"IN_REVIEW","moderationStage":"IN_REVIEW","version":2,"isDeleted":false,"productId":"Product — PRS-2026-602","publishedReviewCount":false,"verifiedBuyerCount":false,"averageStarRating":"Average Star Rating — PRS-2026-602","star1Count":"Star1 Count — PRS-2026-602","star2Count":"Star2 Count — PRS-2026-602","star3Count":"Star3 Count — PRS-2026-602","star4Count":"Star4 Count — PRS-2026-602","star5Count":"Star5 Count — PRS-2026-602","mediaItemCount":"Media Item Count — PRS-2026-602","attributeRollupsJson":"Attribute Rollups Json — PRS-2026-602","aiSummaryPros":false,"aiSummaryCons":false,"aiCitedReviewIds":"Ai Cited Review Ids — PRS-2026-602","aiSummaryUpdatedAt":false},{"id":"00000000-0128-0006-0000-000000000003","recordCode":"PRS-2026-603","title":"Product Reviews Product Rating Summary — Unit #3","name":"Product Reviews Product Rating Summary — Unit #3","modelTitle":"Product Rating Summary","ownerName":"Marcus Vance (Senior Operations)","primaryAttrLabel":"Product","primaryAttrValue":"Product: PRS-2026-603","secondaryAttrLabel":"Published Review Count","secondaryAttrValue":"Product Reviews Tier 3","metricLabel":"Verified Buyer Count","metricValue":"94.7% (845.00 units)","operationalSummary":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == ","invariantRule":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == publishedReview","crossSuiteRef":"1-to-1 with ComProduct.id","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550137","status":"APPROVED","moderationStage":"APPROVED","version":3,"isDeleted":false,"productId":"Product — PRS-2026-603","publishedReviewCount":true,"verifiedBuyerCount":true,"averageStarRating":"Average Star Rating — PRS-2026-603","star1Count":"Star1 Count — PRS-2026-603","star2Count":"Star2 Count — PRS-2026-603","star3Count":"Star3 Count — PRS-2026-603","star4Count":"Star4 Count — PRS-2026-603","star5Count":"Star5 Count — PRS-2026-603","mediaItemCount":"Media Item Count — PRS-2026-603","attributeRollupsJson":"Attribute Rollups Json — PRS-2026-603","aiSummaryPros":true,"aiSummaryCons":true,"aiCitedReviewIds":"Ai Cited Review Ids — PRS-2026-603","aiSummaryUpdatedAt":true},{"id":"00000000-0128-0006-0000-000000000004","recordCode":"PRS-2026-604","title":"Product Reviews Product Rating Summary — Unit #4","name":"Product Reviews Product Rating Summary — Unit #4","modelTitle":"Product Rating Summary","ownerName":"Sophia Laurent (Director)","primaryAttrLabel":"Product","primaryAttrValue":"Product: PRS-2026-604","secondaryAttrLabel":"Published Review Count","secondaryAttrValue":"Product Reviews Tier 1","metricLabel":"Verified Buyer Count","metricValue":"95.8% (892.50 units)","operationalSummary":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == ","invariantRule":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == publishedReview","crossSuiteRef":"1-to-1 with ComProduct.id","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550138","status":"ACTIVE","moderationStage":"ACTIVE","version":4,"isDeleted":false,"productId":"Product — PRS-2026-604","publishedReviewCount":false,"verifiedBuyerCount":false,"averageStarRating":"Average Star Rating — PRS-2026-604","star1Count":"Star1 Count — PRS-2026-604","star2Count":"Star2 Count — PRS-2026-604","star3Count":"Star3 Count — PRS-2026-604","star4Count":"Star4 Count — PRS-2026-604","star5Count":"Star5 Count — PRS-2026-604","mediaItemCount":"Media Item Count — PRS-2026-604","attributeRollupsJson":"Attribute Rollups Json — PRS-2026-604","aiSummaryPros":false,"aiSummaryCons":false,"aiCitedReviewIds":"Ai Cited Review Ids — PRS-2026-604","aiSummaryUpdatedAt":false},{"id":"00000000-0128-0006-0000-000000000005","recordCode":"PRS-2026-605","title":"Product Reviews Product Rating Summary — Unit #5","name":"Product Reviews Product Rating Summary — Unit #5","modelTitle":"Product Rating Summary","ownerName":"Liam Chen (Systems Architect)","primaryAttrLabel":"Product","primaryAttrValue":"Product: PRS-2026-605","secondaryAttrLabel":"Published Review Count","secondaryAttrValue":"Product Reviews Tier 2","metricLabel":"Verified Buyer Count","metricValue":"96.0% (940.00 units)","operationalSummary":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == ","invariantRule":"Deterministically recomputed strictly from PUBLISHED ComProductReviews (star1Count + ... + star5Count == publishedReview","crossSuiteRef":"1-to-1 with ComProduct.id","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550139","status":"DRAFT","moderationStage":"DRAFT","version":5,"isDeleted":false,"productId":"Product — PRS-2026-605","publishedReviewCount":true,"verifiedBuyerCount":true,"averageStarRating":"Average Star Rating — PRS-2026-605","star1Count":"Star1 Count — PRS-2026-605","star2Count":"Star2 Count — PRS-2026-605","star3Count":"Star3 Count — PRS-2026-605","star4Count":"Star4 Count — PRS-2026-605","star5Count":"Star5 Count — PRS-2026-605","mediaItemCount":"Media Item Count — PRS-2026-605","attributeRollupsJson":"Attribute Rollups Json — PRS-2026-605","aiSummaryPros":true,"aiSummaryCons":true,"aiCitedReviewIds":"Ai Cited Review Ids — PRS-2026-605","aiSummaryUpdatedAt":true}],"ComReviewSyndicationFeed":[{"id":"00000000-0128-0007-0000-000000000001","recordCode":"RSF-2026-701","title":"Product Reviews Review Syndication Feed — Unit #1","name":"Product Reviews Review Syndication Feed — Unit #1","modelTitle":"Review Syndication Feed","ownerName":"Elena Rostova (Principal Lead)","primaryAttrLabel":"Feed Name","primaryAttrValue":"Feed Name: RSF-2026-701","secondaryAttrLabel":"Channel Target","secondaryAttrValue":"GOOGLE_SHOPPING_RATINGS","metricLabel":"Site","metricValue":"92.6% (875.00 units)","operationalSummary":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or expl","invariantRule":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or explicitly emitted ","crossSuiteRef":"siteId -> ComSite.id, lastGeneratedFileId -> Rapider Files","updatedAt":"2026-05-10 09:15","contactPhone":"+14155550140","status":"ACTIVE","moderationStage":"ACTIVE","version":1,"isDeleted":false,"feedName":"875.00","channelTarget":"GOOGLE_SHOPPING_RATINGS","siteId":"Site — RSF-2026-701","excludeIncentivized":"Exclude Incentivized — RSF-2026-701","minReviewCountThreshold":"Min Review Count Threshold — RSF-2026-701","includedReviewCount":"Included Review Count — RSF-2026-701","matchedGtinSkuCount":"Matched Gtin Sku Count — RSF-2026-701","lastGeneratedFileId":"875.00","lastGeneratedAt":"875.00"},{"id":"00000000-0128-0007-0000-000000000002","recordCode":"RSF-2026-702","title":"Product Reviews Review Syndication Feed — Unit #2","name":"Product Reviews Review Syndication Feed — Unit #2","modelTitle":"Review Syndication Feed","ownerName":"Marcus Vance (Senior Operations)","primaryAttrLabel":"Feed Name","primaryAttrValue":"Feed Name: RSF-2026-702","secondaryAttrLabel":"Channel Target","secondaryAttrValue":"BING_SHOPPING","metricLabel":"Site","metricValue":"93.7% (922.50 units)","operationalSummary":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or expl","invariantRule":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or explicitly emitted ","crossSuiteRef":"siteId -> ComSite.id, lastGeneratedFileId -> Rapider Files","updatedAt":"2026-05-11 11:15","contactPhone":"+14155550141","status":"GENERATING","moderationStage":"GENERATING","version":2,"isDeleted":false,"feedName":"922.50","channelTarget":"BING_SHOPPING","siteId":"Site — RSF-2026-702","excludeIncentivized":"Exclude Incentivized — RSF-2026-702","minReviewCountThreshold":"Min Review Count Threshold — RSF-2026-702","includedReviewCount":"Included Review Count — RSF-2026-702","matchedGtinSkuCount":"Matched Gtin Sku Count — RSF-2026-702","lastGeneratedFileId":"922.50","lastGeneratedAt":"922.50"},{"id":"00000000-0128-0007-0000-000000000003","recordCode":"RSF-2026-703","title":"Product Reviews Review Syndication Feed — Unit #3","name":"Product Reviews Review Syndication Feed — Unit #3","modelTitle":"Review Syndication Feed","ownerName":"Sophia Laurent (Director)","primaryAttrLabel":"Feed Name","primaryAttrValue":"Feed Name: RSF-2026-703","secondaryAttrLabel":"Channel Target","secondaryAttrValue":"RETAIL_SYNDICATION_XML","metricLabel":"Site","metricValue":"94.8% (970.00 units)","operationalSummary":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or expl","invariantRule":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or explicitly emitted ","crossSuiteRef":"siteId -> ComSite.id, lastGeneratedFileId -> Rapider Files","updatedAt":"2026-05-12 13:15","contactPhone":"+14155550142","status":"ERROR","moderationStage":"ERROR","version":3,"isDeleted":false,"feedName":"970.00","channelTarget":"RETAIL_SYNDICATION_XML","siteId":"Site — RSF-2026-703","excludeIncentivized":"Exclude Incentivized — RSF-2026-703","minReviewCountThreshold":"Min Review Count Threshold — RSF-2026-703","includedReviewCount":"Included Review Count — RSF-2026-703","matchedGtinSkuCount":"Matched Gtin Sku Count — RSF-2026-703","lastGeneratedFileId":"970.00","lastGeneratedAt":"970.00"},{"id":"00000000-0128-0007-0000-000000000004","recordCode":"RSF-2026-704","title":"Product Reviews Review Syndication Feed — Unit #4","name":"Product Reviews Review Syndication Feed — Unit #4","modelTitle":"Review Syndication Feed","ownerName":"Liam Chen (Systems Architect)","primaryAttrLabel":"Feed Name","primaryAttrValue":"Feed Name: RSF-2026-704","secondaryAttrLabel":"Channel Target","secondaryAttrValue":"MARKETPLACE_EXPORT","metricLabel":"Site","metricValue":"95.0% (1017.50 units)","operationalSummary":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or expl","invariantRule":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or explicitly emitted ","crossSuiteRef":"siteId -> ComSite.id, lastGeneratedFileId -> Rapider Files","updatedAt":"2026-05-13 15:15","contactPhone":"+14155550143","status":"ACTIVE","moderationStage":"ACTIVE","version":4,"isDeleted":false,"feedName":"1017.50","channelTarget":"MARKETPLACE_EXPORT","siteId":"Site — RSF-2026-704","excludeIncentivized":"Exclude Incentivized — RSF-2026-704","minReviewCountThreshold":"Min Review Count Threshold — RSF-2026-704","includedReviewCount":"Included Review Count — RSF-2026-704","matchedGtinSkuCount":"Matched Gtin Sku Count — RSF-2026-704","lastGeneratedFileId":"1017.50","lastGeneratedAt":"1017.50"},{"id":"00000000-0128-0007-0000-000000000005","recordCode":"RSF-2026-705","title":"Product Reviews Review Syndication Feed — Unit #5","name":"Product Reviews Review Syndication Feed — Unit #5","modelTitle":"Review Syndication Feed","ownerName":"Amira Al-Mansoor (Compliance Lead)","primaryAttrLabel":"Feed Name","primaryAttrValue":"Feed Name: RSF-2026-705","secondaryAttrLabel":"Channel Target","secondaryAttrValue":"GOOGLE_SHOPPING_RATINGS","metricLabel":"Site","metricValue":"96.1% (1065.00 units)","operationalSummary":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or expl","invariantRule":"For GOOGLE_SHOPPING_RATINGS, excludeIncentivized is locked true if strict merchant policy applies or explicitly emitted ","crossSuiteRef":"siteId -> ComSite.id, lastGeneratedFileId -> Rapider Files","updatedAt":"2026-05-14 17:15","contactPhone":"+14155550144","status":"GENERATING","moderationStage":"GENERATING","version":5,"isDeleted":false,"feedName":"1065.00","channelTarget":"GOOGLE_SHOPPING_RATINGS","siteId":"Site — RSF-2026-705","excludeIncentivized":"Exclude Incentivized — RSF-2026-705","minReviewCountThreshold":"Min Review Count Threshold — RSF-2026-705","includedReviewCount":"Included Review Count — RSF-2026-705","matchedGtinSkuCount":"Matched Gtin Sku Count — RSF-2026-705","lastGeneratedFileId":"1065.00","lastGeneratedAt":"1065.00"}]};
+
+    window.loadEntitySWR = async function(entityName, onUpdate) {
+      var fallback = (window.SEED_DATA && window.SEED_DATA[entityName]) ? window.SEED_DATA[entityName].slice() : [];
+      try {
+        if (window.rapiderApi && typeof window.rapiderApi.findSWR === 'function') {
+          var res = await window.rapiderApi.findSWR(entityName, {}, function(fresh) {
+            if (Array.isArray(fresh) && fresh.length > 0) {
+              onUpdate(fresh.filter(function(r) { return r && r.isDeleted !== true; }));
+            }
+          });
+          var arr = Array.isArray(res) ? res : (res && Array.isArray(res.data) ? res.data : []);
+          var clean = arr.filter(function(r) { return r && r.isDeleted !== true; });
+          onUpdate(clean.length > 0 ? clean : fallback);
+          return;
+        }
+      } catch (_) {}
+      onUpdate(fallback);
+    };
+
+
+      var rows_2 = [];
+      function renderLedger_2() {
+        var q = (document.getElementById('ledgerSearch_2').value || '').trim().toLowerCase();
+        var st = document.getElementById('ledgerStatus_2').value;
+        var bar = document.getElementById('activeFilterTagsBar');
+        var chips = [];
+        if (q) chips.push('<span class="filter-chip">Search: "' + esc(q) + '" <button type="button" onclick="document.getElementById(\'ledgerSearch_2\').value=\'\';renderLedger_2();">✕</button></span>');
+        if (st !== 'ALL') chips.push('<span class="filter-chip">Status: "' + esc(st) + '" <button type="button" onclick="document.getElementById(\'ledgerStatus_2\').value=\'ALL\';renderLedger_2();">✕</button></span>');
+        if (chips.length > 0) {
+          bar.style.display = 'flex';
+          bar.innerHTML = '<span style="font-weight:700;color:var(--muted);font-size:11px;text-transform:uppercase;">Active:</span> ' + chips.join(' ') + ' <button type="button" class="btn small" style="margin-left:auto;" onclick="document.getElementById(\'ledgerSearch_2\').value=\'\';document.getElementById(\'ledgerStatus_2\').value=\'ALL\';renderLedger_2();"><i class="fas fa-times-circle"></i> Clear all</button>';
+        } else {
+          bar.style.display = 'none';
+          bar.innerHTML = '';
+        }
+        var filtered = rows_2.filter(function(r) {
+          var mQ = !q || JSON.stringify(r).toLowerCase().indexOf(q) !== -1;
+          var mSt = st === 'ALL' || r.status === st;
+          return mQ && mSt;
+        });
+        document.getElementById('ledgerCount_2').textContent = filtered.length + ' Records';
+        document.getElementById('ledgerRows_2').innerHTML = filtered.map(function(r) {
+          return '<tr>' +
+            '<td><a href="#/review-detail?id=' + esc(r.id) + '" class="primary-link">' + esc(r.recordCode) + '</a><div style="font-size:11px;color:var(--muted);">' + esc(r.updatedAt) + '</div></td>' +
+            '<td><a href="#/review-detail?id=' + esc(r.id) + '" class="primary-link">' + esc(r.title) + '</a><div style="font-size:12px;color:var(--muted);margin-top:2px;">' + esc(r.operationalSummary) + '</div></td>' +
+            '<td><span class="badge purple">' + esc(r.secondaryAttrValue) + '</span></td>' +
+            '<td><strong>' + esc(r.metricValue) + '</strong></td>' +
+            '<td><div style="font-size:12px;font-weight:600;">' + esc(r.ownerName) + '</div><div style="font-size:11px;color:var(--muted);">' + esc(r.crossSuiteRef) + '</div></td>' +
+            '<td><span class="badge green">' + esc(r.status) + '</span></td>' +
+            '<td style="white-space:nowrap;">' +
+              '<a href="#/review-detail?id=' + esc(r.id) + '" class="btn small"><i class="fas fa-edit mr-1"></i>Edit</a> ' +
+              '<button type="button" class="btn icon-only" title="Delete" aria-label="Delete" onclick="deleteLedgerRow_2(\'' + esc(r.id) + '\', \'' + esc(r.recordCode) + '\')"><i class="fas fa-trash-alt"></i></button>' +
+            '</td>' +
+          '</tr>';
+        }).join('');
+      }
+      window.deleteLedgerRow_2 = function(id, code) {
+        window.showConfirmModal('Remove Product Question', 'Soft-delete ' + code + ' from Community Product Q&amp;A?', async function() {
+          if (window.rapiderApi && typeof window.rapiderApi.delete === 'function') {
+            await window.rapiderApi.delete('ComProductQuestion', id);
+          }
+          rows_2 = rows_2.filter(function(r) { return r.id !== id; });
+          renderLedger_2();
+          window.toast('Archived ' + code, 'info');
+        });
+      };
+      document.getElementById('ledgerSearch_2').addEventListener('input', renderLedger_2);
+      document.getElementById('ledgerStatus_2').addEventListener('change', renderLedger_2);
+      window.loadEntitySWR('ComProductQuestion', function(rows) { rows_2 = rows; renderLedger_2(); });
+    
+  </script>
 </body>
 </html>

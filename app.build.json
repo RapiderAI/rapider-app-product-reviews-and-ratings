@@ -4,8 +4,8 @@
   "appName": "Rapider Product Reviews & Ratings",
   "repository": "",
   "version": "1.0.0",
-  "lastBuildTimestamp": "2026-11-01T11:43:10.235Z",
-  "lastCommit": "62f8f56",
+  "lastBuildTimestamp": "2026-11-02T09:48:36.616Z",
+  "lastCommit": "37aa8f0",
   "summary": {
     "status": "qa_passed",
     "complianceRate": 100,
@@ -18,147 +18,147 @@
     "failedQaPasses": 0,
     "e2eSuitesCount": 0,
     "e2ePassedCount": 0,
-    "lastFullAudit": "2026-11-01T11:43:10.235Z",
+    "lastFullAudit": "2026-11-02T09:48:36.616Z",
     "lastE2ERun": null
   },
   "qaPasses": {
     "pass-01-routing": {
       "name": "pass-01-routing",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-02-swr": {
       "name": "pass-02-swr",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-03-data-models": {
       "name": "pass-03-data-models",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-04-modals": {
       "name": "pass-04-modals",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-05-drawers": {
       "name": "pass-05-drawers",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-06-responsive": {
       "name": "pass-06-responsive",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-07-themes": {
       "name": "pass-07-themes",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-08-notifications": {
       "name": "pass-08-notifications",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-09-payloads": {
       "name": "pass-09-payloads",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-10-components": {
       "name": "pass-10-components",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-11-e2e-expectations": {
       "name": "pass-11-e2e-expectations",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-12-asset-externalization": {
       "name": "pass-12-asset-externalization",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-13-manifest-sync": {
       "name": "pass-13-manifest-sync",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-14-ui-states": {
       "name": "pass-14-ui-states",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-15-security": {
       "name": "pass-15-security",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-16-accessibility": {
       "name": "pass-16-accessibility",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-17-input-formatting": {
       "name": "pass-17-input-formatting",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-18-kanban-list-views": {
       "name": "pass-18-kanban-list-views",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-19-ui-best-practices": {
       "name": "pass-19-ui-best-practices",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     },
     "pass-20-search-filters": {
       "name": "pass-20-search-filters",
       "status": "passed",
-      "lastRun": "2026-11-01T11:43:10.235Z",
+      "lastRun": "2026-11-02T09:48:36.616Z",
       "pagesCovered": 12,
       "issuesFound": 0
     }
@@ -167,410 +167,254 @@
     "pages/dashboard/dashboard.html": {
       "pageName": "Reviews & Trust Overview",
       "route": "dashboard",
-      "fileHash": "sha256:5f0fd959bfd288d970eaf4fc6e549571034267f4c53c793f1fb77a9f186f3a9e",
-      "lastModified": "2026-11-01T11:43:10.136Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
+      "fileHash": "sha256:72fda646023a44d56419ab27bccc853f88208cd7fe5efbcb1fc94701b02f6ad4",
+      "lastModified": "2026-11-02T09:48:36.501Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
       "status": "passed",
       "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
         "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
+        "linksTotal": 14,
+        "linksValid": 14,
         "nativeAlerts": 0,
         "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
+        "swrCalls": 0,
+        "modalsTotal": 0
       },
       "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
+      "warnings": []
     },
     "pages/reviews/reviews.html": {
       "pageName": "Reviews Moderation Queue",
       "route": "reviews",
-      "fileHash": "sha256:966f21889efd5250d81a47c71719f4e168f01e828795ac83581083f6715d1fb7",
-      "lastModified": "2026-11-01T11:43:10.136Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
+      "fileHash": "sha256:61c6a5c4b268f0e3b3eedd75eb0d56f6f05e8ad916fe8406ada387d77eb79f97",
+      "lastModified": "2026-11-02T09:48:36.502Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
       "status": "passed",
       "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
         "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
+        "linksTotal": 14,
+        "linksValid": 14,
         "nativeAlerts": 0,
         "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
+        "swrCalls": 0,
+        "modalsTotal": 0
       },
       "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
+      "warnings": []
     },
     "pages/questions/questions.html": {
       "pageName": "Community Product Q&A",
       "route": "questions",
-      "fileHash": "sha256:657cf85cd2a5ae15d66237d8b5e30fe8acc918277f58777ff1a281f85d7056af",
-      "lastModified": "2026-11-01T11:43:10.136Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
+      "fileHash": "sha256:724936e1f4b1a4813e35c90cf6c47c1b7e0154b0e92ae8fbc35e2275cbd4db3c",
+      "lastModified": "2026-11-02T09:48:36.502Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
       "status": "passed",
       "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/invitations/invitations.html": {
-      "pageName": "Review Requests & Sampling",
-      "route": "invitations",
-      "fileHash": "sha256:e8ece4f4e9e2c31c0a3b22aeb76fd787176ef1c4105dbfc019e5bdc1adb66b6d",
-      "lastModified": "2026-11-01T11:43:10.136Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/media-gallery/media-gallery.html": {
-      "pageName": "Photo & Video UGC Studio",
-      "route": "media-gallery",
-      "fileHash": "sha256:0c4622fab3dd5769db47f9b354803844da05b510147153e5175d8b18ea4fffbe",
-      "lastModified": "2026-11-01T11:43:10.137Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/attribute-templates/attribute-templates.html": {
-      "pageName": "Fit Sliders & Smart Prompts",
-      "route": "attribute-templates",
-      "fileHash": "sha256:03cf44deef681c28fc164b9fdd3438c87516cc0a7e316475dfc57a3ac908c9f5",
-      "lastModified": "2026-11-01T11:43:10.137Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/product-ratings/product-ratings.html": {
-      "pageName": "SKU Rating & Fit Rollups",
-      "route": "product-ratings",
-      "fileHash": "sha256:07c7f9d01f38c6c733057f6a66cb8f656b70ce4b02093777e997eb7ea7ff1dd7",
-      "lastModified": "2026-11-01T11:43:10.138Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/syndication/syndication.html": {
-      "pageName": "Google & Retail Syndication",
-      "route": "syndication",
-      "fileHash": "sha256:c3cef2450f1d069cb795511bebfbe33abefb139d1f76c2475166cde6e4aea58e",
-      "lastModified": "2026-11-01T11:43:10.138Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/quality-insights/quality-insights.html": {
-      "pageName": "Sentiment & Defect Analytics",
-      "route": "quality-insights",
-      "fileHash": "sha256:cea5bf4e71c68dce05a2daf80ab583451f690d1c9ae0f7a11ccae0181586213d",
-      "lastModified": "2026-11-01T11:43:10.138Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 8,
-        "buttonsWithActions": 8,
-        "deadButtons": 0,
-        "linksTotal": 12,
-        "linksValid": 12,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 2,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/review-detail/review-detail.html": {
-      "pageName": "Review, Media & FTC Audit Detail",
-      "route": "review-detail",
-      "fileHash": "sha256:b155d9d14d5dfd61e52ea98bdbfacec6c569425aa42214751a2b35c0144170a3",
-      "lastModified": "2026-11-01T11:43:10.139Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 9,
-        "buttonsWithActions": 9,
-        "deadButtons": 0,
-        "linksTotal": 14,
-        "linksValid": 14,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 0,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/question-detail/question-detail.html": {
-      "pageName": "Product Q&A Thread Inspector",
-      "route": "question-detail",
-      "fileHash": "sha256:6b03fe7589159ae6ead09e722e08ca14ca6bbc873eff82b5182ac9127524a237",
-      "lastModified": "2026-11-01T11:43:10.139Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 9,
-        "buttonsWithActions": 9,
-        "deadButtons": 0,
-        "linksTotal": 14,
-        "linksValid": 14,
-        "nativeAlerts": 0,
-        "contrastCompliant": true,
-        "swrCalls": 0,
-        "modalsTotal": 1
-      },
-      "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
-    },
-    "pages/product-rating-detail/product-rating-detail.html": {
-      "pageName": "Product Rollup & AI Summary View",
-      "route": "product-rating-detail",
-      "fileHash": "sha256:b1c755424aba65d0f44c56f2fa4743304677e3c1c3eb14af22d4d3ff824c53c4",
-      "lastModified": "2026-11-01T11:43:10.139Z",
-      "lastTested": "2026-11-01T11:43:10.235Z",
-      "status": "passed",
-      "metrics": {
-        "buttonsTotal": 7,
-        "buttonsWithActions": 7,
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
         "deadButtons": 0,
         "linksTotal": 14,
         "linksValid": 14,
         "nativeAlerts": 0,
         "contrastCompliant": true,
         "swrCalls": 1,
-        "modalsTotal": 1
+        "modalsTotal": 0
       },
       "issues": [],
-      "warnings": [
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_LIGHT_BACKGROUND",
-          "message": "Container has \"bg-white\" without a corresponding \"dark:bg-*\" variant class (sidebar w-64 bg-white border-r border-slate-200 fl).",
-          "snippet": "<div class=\"sidebar w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 transition-all duration-300 z-30 select-none\">"
-        },
-        {
-          "rule": "Pass 11: Dark & Light Theme Compliance",
-          "type": "HARDCODED_DARK_TEXT",
-          "message": "Text has hardcoded dark color without a corresponding \"dark:text-*\" variant (bg-slate-50 text-slate-900 font-sans antialiased m).",
-          "snippet": "<div class=\"bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex\">"
-        }
-      ]
+      "warnings": []
+    },
+    "pages/invitations/invitations.html": {
+      "pageName": "Review Requests & Sampling",
+      "route": "invitations",
+      "fileHash": "sha256:53f532fefd9fd4c4d8ca172dcb7669f05cde3dee5abe0e5c389560376f5426ae",
+      "lastModified": "2026-11-02T09:48:36.503Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
+        "deadButtons": 0,
+        "linksTotal": 14,
+        "linksValid": 14,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 1,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/media-gallery/media-gallery.html": {
+      "pageName": "Photo & Video UGC Studio",
+      "route": "media-gallery",
+      "fileHash": "sha256:721474615eb438d114bce23430ad0f0f61431530bc8bd784d5c672c1667a13d2",
+      "lastModified": "2026-11-02T09:48:36.504Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
+        "deadButtons": 0,
+        "linksTotal": 14,
+        "linksValid": 14,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 0,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/attribute-templates/attribute-templates.html": {
+      "pageName": "Fit Sliders & Smart Prompts",
+      "route": "attribute-templates",
+      "fileHash": "sha256:1fac5c4c677461d20f7cb246d68ecd9067a265373720664c77aee126e3bd3bb6",
+      "lastModified": "2026-11-02T09:48:36.504Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
+        "deadButtons": 0,
+        "linksTotal": 14,
+        "linksValid": 14,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 1,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/product-ratings/product-ratings.html": {
+      "pageName": "SKU Rating & Fit Rollups",
+      "route": "product-ratings",
+      "fileHash": "sha256:3c9d7e6374b91b617e40a2cae7dc768347fabe83b3ee4bbf1a709f6955432887",
+      "lastModified": "2026-11-02T09:48:36.505Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
+        "deadButtons": 0,
+        "linksTotal": 14,
+        "linksValid": 14,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 1,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/syndication/syndication.html": {
+      "pageName": "Google & Retail Syndication",
+      "route": "syndication",
+      "fileHash": "sha256:f8372130e5d4692d08433699fcf0c099628cea2649b4a1ebb2969c7b85fec57e",
+      "lastModified": "2026-11-02T09:48:36.505Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
+        "deadButtons": 0,
+        "linksTotal": 14,
+        "linksValid": 14,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 1,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/quality-insights/quality-insights.html": {
+      "pageName": "Sentiment & Defect Analytics",
+      "route": "quality-insights",
+      "fileHash": "sha256:8474cb3f1b0ca31e809311c12776b403adfa2e459d3f228189c3d77229b58fa8",
+      "lastModified": "2026-11-02T09:48:36.506Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 6,
+        "buttonsWithActions": 6,
+        "deadButtons": 0,
+        "linksTotal": 14,
+        "linksValid": 14,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 1,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/review-detail/review-detail.html": {
+      "pageName": "Review, Media & FTC Audit Detail",
+      "route": "review-detail",
+      "fileHash": "sha256:624df9102c79698af17cbc5f1cb3d746e4b3819cd3b7812072427d02ff69468d",
+      "lastModified": "2026-11-02T09:48:36.507Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 5,
+        "buttonsWithActions": 5,
+        "deadButtons": 0,
+        "linksTotal": 15,
+        "linksValid": 15,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 0,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/question-detail/question-detail.html": {
+      "pageName": "Product Q&A Thread Inspector",
+      "route": "question-detail",
+      "fileHash": "sha256:f986ed3a86a37ed8f910efc423f27c3398645135004e5d2eef3b3cfa0ff320b0",
+      "lastModified": "2026-11-02T09:48:36.508Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 5,
+        "buttonsWithActions": 5,
+        "deadButtons": 0,
+        "linksTotal": 15,
+        "linksValid": 15,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 0,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
+    },
+    "pages/product-rating-detail/product-rating-detail.html": {
+      "pageName": "Product Rollup & AI Summary View",
+      "route": "product-rating-detail",
+      "fileHash": "sha256:74b066c1445c01d461df247fa71e89ea9534613796c099116a93af3a849cb8b3",
+      "lastModified": "2026-11-02T09:48:36.509Z",
+      "lastTested": "2026-11-02T09:48:36.616Z",
+      "status": "passed",
+      "metrics": {
+        "buttonsTotal": 5,
+        "buttonsWithActions": 5,
+        "deadButtons": 0,
+        "linksTotal": 15,
+        "linksValid": 15,
+        "nativeAlerts": 0,
+        "contrastCompliant": true,
+        "swrCalls": 0,
+        "modalsTotal": 0
+      },
+      "issues": [],
+      "warnings": []
     }
   },
   "e2eSuites": {
@@ -580,6 +424,16 @@
     "suites": []
   },
   "history": [
+    {
+      "timestamp": "2026-11-02T09:48:36.616Z",
+      "action": "qa_full_audit",
+      "commit": "37aa8f0",
+      "complianceRate": 100,
+      "pagesAudited": 12,
+      "status": "passed",
+      "agent": "Antigravity",
+      "details": "12/12 pages passed. Completed 20/20 QA passes."
+    },
     {
       "timestamp": "2026-11-01T11:43:10.235Z",
       "action": "qa_full_audit",
